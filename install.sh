@@ -22,7 +22,7 @@ echo -e "\nStarting miniconda3 installation......" `date` >> $k/install_log.txt
 echo -e "\n" >> $k/install_log.txt
 
 # Installing the Miniconda3 in the current path
-sh ../Miniconda3-latest-Linux-x86_64.sh -b -p $k/miniconda3 >> $k/install_log.txt
+sh Miniconda3-latest-Linux-x86_64.sh -b -p $k/temp/miniconda3 >> $k/install_log.txt
 
 # Removing the miniconda installer
 rm Miniconda3-latest-Linux-x86_64.sh
