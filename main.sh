@@ -36,21 +36,18 @@ vcf_folder=${vcf_folder:-$curr_path}
 echo -e "\nFolder of the VCF files read......" `date` >> mainlog.txt
 
 # Reading the full path of the gold standard files 
-echo -e "\nPlease enter the filename along with the full path for the gold standard file. Default:current directory"
+echo -e "\nPlease enter the filename along with the full path for the gold standard file"
 read vcf_gold
-vcf_gold=${vcf_gold:-$curr_path}
 echo -e	"\nPath of the gold standard file read......" `date` >> mainlog.txt
 
 # Reading the path of the bed file
-echo -e "\nPlease enter the filename along with the full path for the bed file. Default:current directory"
+echo -e "\nPlease enter the filename along with the full path for the bed file"
 read bed
-bed=${bed:-$curr_path}
 echo -e	"\nPath of the bed file read......" `date` >> mainlog.txt
 
 # Reading the full path of the reference file
-echo -e "\nPlease enter the filename along with the full path for the reference file. Default:current directory"
+echo -e "\nPlease enter the filename along with the full path for the reference file"
 read ref
-ref=${ref:-$curr_path}
 echo -e "\nPath of the reference file read......" `date` >> mainlog.txt
 
 # Reading the output folder path
