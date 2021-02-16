@@ -103,4 +103,4 @@ h=$((secs/3600))
 m=$((secs%3600/60))
 s=$((secs%60))
 
-echo "The total running time of the installation process is $h hour(s) $m minute(s) and $s second(s)" >> $k/install_log.txt
+echo -e "\nThe total running time of the installation process is $h hour(s) $m minute(s) and $s second(s)" >> $k/install_log.txt
