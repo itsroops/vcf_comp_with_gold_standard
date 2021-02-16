@@ -159,7 +159,7 @@ def happy_plots():
         ax.set_xticks(x)
         ax.set_xticklabels(labels, rotation=90)
         ax.legend()
-        plt.savefig(filepath  + "/" + title[c] + ".pdf")
+        plt.savefig(filepath  + "/" + title[c] + ".pdf", format="pdf", bbox_inches = 'tight')
         plt.ioff()
 
 
