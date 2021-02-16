@@ -192,4 +192,4 @@ h=$((secs/3600))
 m=$((secs%3600/60))
 s=$((secs%60))
 
-echo "The total running time of the program is $h hour(s) $m minute(s) and $s second(s)" >> mainlog.txt
+echo -e "\nThe total running time of the program is $h hour(s) $m minute(s) and $s second(s)" >> mainlog.txt
