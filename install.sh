@@ -15,8 +15,10 @@ cd temp
 
 echo -e "\nNavigating to the temporary directory......" `date` >> $k/install_log.txt
 
+echo -e "\nDownloading the latest miniconda3 installer......" `date` >> $k/install_log.txt
+
 # Downloading the miniconda installer
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 2>/dev/null
 
 echo -e "\nStarting miniconda3 installation......" `date` >> $k/install_log.txt
 echo -e "\n" >> $k/install_log.txt
@@ -40,7 +42,7 @@ echo -e "\nminiconda3 installation completed and it is installed in the minconda
 echo -e "\nStarting installation of cmake......" `date` >> $k/install_log.txt
 
 # Installing the cmake
-wget https://cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz >> $k/install_log.txt
+wget https://cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz 2>/dev/null
 tar xf cmake-3.2.3-Linux-x86_64.tar.gz
 rm cmake-3.2.3-Linux-x86_64.tar.gz
 
@@ -73,7 +75,7 @@ echo -e "\nDownloading the hap.py tool from the github......" `date` >> $k/insta
 echo -e "\n" >> $k/install_log.txt
 
 # Downloading the hap.py tool
-git clone https://github.com/sequencing/hap.py >> $k/install_log.txt
+git clone https://github.com/sequencing/hap.py 2>/dev/null
 
 echo -e "\nMaking the build folder for installation named as hap.py-build......" `date` >> $k/install_log.txt
 
