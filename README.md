@@ -18,7 +18,7 @@ Please execute the script `sh main.sh`
 The outputs from the tool can be categorized into two forms, namely, *log files* and *plot files*.
 
 1. There are three types of *log files* which are generated.
-   * *install_log.txt*: This is an installation log file which is generated during installation of the dependencies and it records all the installation processesas   
+   * *install_log.txt*: This is an installation log file which is generated during installation of the dependencies and it records all the installation processes   
       it occur in the system.
       
    * *mainlog.txt*: This file is generated during the actual execution of the tool and it records all the steps in details.
