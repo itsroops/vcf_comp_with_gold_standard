@@ -1,5 +1,5 @@
 # Automated comparison of VCF files with gold standard file using hap.py tool
-This tool would use the **hap.py** comparison tool for comparing the generated VCF files with the gold standard file. This can be used to autoomated the process of comparing several vcf files with the gold standard file and specifically used for the SNPs and INDELs. This is fully an interactive tool which would aid a novice user to make the comparisons without much technical knowledge of the software requirements and other usages. 
+This tool would use the **hap.py** comparison tool for comparing the generated VCF files with the gold standard file. This can be used to autoomated the process of comparing several vcf files with the gold standard file and specifically used for the SNPs and INDELs. This is fully an interactive tool which would aid a novice user to make the comparisons without much technical knowledge of the software requirements and other usages. However, work is in progress to make the tool also accept command line arguments so that it can be augmented with any existing pipelines for analysis purpooses.
 
 ## Prerequisites
 1. Please be sure to have **make** program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
