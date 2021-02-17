@@ -10,7 +10,8 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 ## Installation
 The installation process is pretty straightforward and can be achieved easily by the following steps.
 1. Execute the command `git clone https://github.com/itsroops/vcf_comp_with_gold_standard`
-2. Run the script `sh start_install.sh`. This will take care of all the dependencies and will download them.
+2. Navigate to the directory by running `cd vcf_comp_with_gold_standard`
+3. Run the script by executing `sh start_install.sh`. This will take care of all the dependencies and will download them.
 
 ## Running the tool
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
