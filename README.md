@@ -15,7 +15,7 @@ The usage is pretty simple and the interactive dialogs would guide in accepting 
 Please execute the script `sh main.sh`
 
 ## Outputs
-The outputs from the tool can be categorized into two forms, namely, *log files* and *plot files*.
+The outputs from the tool can be categorized into three forms, namely, *log files* and *plot files* and *other result files*.
 
 1. There are three types of *log files* which are generated.
    * *install_log.txt*: This is an installation log file which is generated during installation of the dependencies 
@@ -24,5 +24,10 @@ The outputs from the tool can be categorized into two forms, namely, *log files*
    * *mainlog.txt*: This file is generated during the actual execution of the tool and it records all the steps in details.
    * *slurm-jobid.out*: There are several of these files which log the events of the slurm jobs which have been submitted to the scheduler. 
   
-2.  The *plot files* 
+2.  The *plot files* include the combined bar plots comparing the values for different metrices like recall, precision and  f1 scores for all the vcf files.
+
+3.  The *other result files* contain outputs from the *hap.py* tool run.
+
+## References
+1. For the **hap.py** tool: https://github.com/Illumina/hap.py
 
