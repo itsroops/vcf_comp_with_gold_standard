@@ -1,9 +1,9 @@
 # Automated comparison of VCF files with gold standard file using hap.py tool
-This tool would use the hap.py comparison tool for comparing the generated VCF files with the gold standard file. 
+This tool would use the **hap.py** comparison tool for comparing the generated VCF files with the gold standard file. 
 
 ## Prerequisites
-1. Please be sure to have 'make' program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
-2. Please install 'git' in the system. 
+1. Please be sure to have **make** program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
+2. Please install **git** in the system. 
 
 ## Installation
 The installation process is pretty strightforward and can be achieved easily by the following steps.
