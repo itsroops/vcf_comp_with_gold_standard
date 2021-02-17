@@ -30,5 +30,6 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 
 ## References
 1. For the **hap.py** tool: https://github.com/Illumina/hap.py
+
 2. For installing **git**: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
