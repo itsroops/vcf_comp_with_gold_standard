@@ -70,7 +70,7 @@ read ch2
 ch2=${ch2:-N}
 
 # Removing the "chr" from the chromosome numbers present in the gold standard file in order to make it compatible for comparison
-f_name=`python3 remove_chr.py $vcf_gold $ch2`
+f_name=`$curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2`
 echo -e "\nchr removed from the chromosome numbers......" `date` >> mainlog.txt
 
 fi
