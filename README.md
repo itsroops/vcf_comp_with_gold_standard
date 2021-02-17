@@ -14,3 +14,14 @@ The installation process is pretty strightforward and can be achieved easily by 
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
 Please execute the script `sh main.sh`
 
+## Outputs
+The outputs from the tool can be categorized into two forms, namely, Log Files and plot files.
+
+1. Log Files: There are three types of log files which are generated.
+  a. *install_log.txt*: This is an installation log file which is generated during installation of the dependencies and it records all the installation processesas   
+      it occur in the system.
+  b. *mainlog.txt*: This file is generated during the actual execution of the tool and it records all the steps in details.
+  c. *slurm-jobid.out*: There are several of these files which log the events of the slurm jobs which have been submitted to the scheduler.
+  
+2.  
+
