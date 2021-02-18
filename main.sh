@@ -70,8 +70,10 @@ read ch2
 ch2=${ch2:-N}
 
 # Removing the "chr" from the chromosome numbers present in the gold standard file in order to make it compatible for comparison
-f_name=`$curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2`
+echo -e "\nPlease wait......"
+f_name=$($curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2 2>&1)
 echo -e "\nchr removed from the chromosome numbers......" `date` >> mainlog.txt
+vcf_gold=$f_name
 
 fi
 
@@ -123,7 +125,7 @@ read mail_id
 echo -e "\nMail id read......" `date` >> mainlog.txt
 echo -e "\n" >> mainlog.txt
 
-# Proving executable permissions to the file for all
+# Providing executable permissions to the file for all
 chmod a+x generate_plots.sh
 
 # Executing the generation of plots script in the background by taking the variables from the current shell
