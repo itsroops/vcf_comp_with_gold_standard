@@ -15,7 +15,7 @@ def rem_chr():
         f2.write(k2)
     f.close()
     f2.close()
-    return f_name
+    exit(f_name)
 
 if __name__=='__main__':
     rem_chr()
