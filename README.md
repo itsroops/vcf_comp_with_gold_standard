@@ -39,3 +39,5 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 
 2. For installing **git**: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
+3. For **Slurm Workload Manager**: https://slurm.schedmd.com/quickstart.html
+
