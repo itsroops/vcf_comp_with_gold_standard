@@ -42,5 +42,5 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 3. For **Slurm Workload Manager**: https://slurm.schedmd.com/quickstart.html
 
 ## Contact
-For any queries/issues please mail to *avirupgn@gmail.com*
+For any queries/issues, please mail to *avirupgn@gmail.com*
 
