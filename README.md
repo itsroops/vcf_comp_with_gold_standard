@@ -5,9 +5,9 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 
 ## Prerequisites
 
-### Software
-1. Please be sure to have **make** program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
-2. Please install **git** in the system. 
+1. This works in typical linux clusters having **slurm workload manager**. 
+2. Please be sure to have **make** program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
+3. Please install **git** in the system. 
 
 ## Installation
 The installation process is pretty straightforward and can be achieved easily by the following steps.
