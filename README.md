@@ -16,6 +16,8 @@ The installation process is pretty straightforward and can be achieved easily by
 2. Navigate to the directory by running `cd vcf_comp_with_gold_standard`
 3. Run the script by executing `sh start_install.sh`. This will take care of all the dependencies and will download them.
 
+*In case of instllation failure: If you have to restart the installation process, please delete the **temp** folder that has been created by `rm -rf temp` and then begin fresh installation.*
+
 ## Running the tool
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
 Please execute the script `sh main.sh`
