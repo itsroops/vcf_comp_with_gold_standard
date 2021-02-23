@@ -42,7 +42,7 @@ echo -e "\nminiconda3 installation completed and it is installed in the minconda
 echo -e "\nStarting installation of cmake......" `date` >> $k/install_log.txt
 
 # Installing the cmake
-wget https://cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz 2>/dev/null
+wget --no-check-certificate https://cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz 2>/dev/null
 tar xf cmake-3.2.3-Linux-x86_64.tar.gz
 rm cmake-3.2.3-Linux-x86_64.tar.gz
 
