@@ -18,7 +18,7 @@ echo -e "\nNavigating to the temporary directory......" `date` >> $k/install_log
 echo -e "\nDownloading the latest miniconda3 installer......" `date` >> $k/install_log.txt
 
 # Downloading the miniconda installer
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 2>/dev/null
+wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 2>/dev/null
 
 echo -e "\nStarting miniconda3 installation......" `date` >> $k/install_log.txt
 echo -e "\n" >> $k/install_log.txt
