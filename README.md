@@ -7,7 +7,8 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 
 1. This works in typical linux clusters having **slurm workload manager**. 
 2. Please be sure to have **make** program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
-3. Please install **git** in the system. 
+3. Please install **git** in the system.
+4. GCC/G++ 4.9.2+ for compiling
 
 ## Installation
 The installation process is pretty straightforward and can be achieved easily by the following steps.
