@@ -27,6 +27,8 @@ Mandatory files required are:
 3. A bed file ending with .bed extension.
 4. A gold standard file ending with .vcf extension
 
+All relevant input data validations are in place for user's convenience.
+
 ### Interactive mode
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
 Please execute the script by running the command `sh main.sh`. 
