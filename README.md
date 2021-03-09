@@ -1,7 +1,7 @@
 # Automated benchmarking of a set of VCF files with a gold standard file using hap.py tool
 
 ## About
-This tool would use the **hap.py** comparison tool for comparing the generated VCF files with the gold standard file. This can be used to automate the process of comparing several vcf files with the gold standard file and specifically used for the SNPs and INDELs. This is fully an interactive tool which would aid a novice user to make the comparisons without much technical knowledge of the software requirements and other usages. However, work is in progress to make the tool also accept command line arguments so that it can be augmented with any existing pipelines for analysis purposes.
+This tool would use the **hap.py** comparison tool for comparing the generated VCF files with the gold standard file. This can be used to automate the process of comparing several vcf files with the gold standard file and specifically used for the SNPs and INDELs. It can be used either in an interactive way or by using  the command line interface by providing the parameters as options. The interactive method would aid a novice user to make the comparisons without much technical knowledge of the software requirements and other usages. However, for the initegration of this tool into any existing bioinformatics pipleline, the command line interface needs to be used. This interface is for users having basic knowledge of linux commands and for those who know how to run such interfaces.
 
 ## Prerequisites
 
@@ -19,6 +19,7 @@ The installation process is pretty straightforward and can be achieved easily by
 *In case of installation failure: If you have to restart the installation process, please delete the **temp** folder that has been created by `rm -rf temp` and then begin fresh installation.*
 
 ## Running the tool
+The tool can be run either in 
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
 Please execute the script `sh main.sh`
 
