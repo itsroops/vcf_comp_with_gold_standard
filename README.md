@@ -40,7 +40,7 @@ The compulsory options are the *gold standard file*, *bed file*, *reference file
 A sample command line run would look like the following:
 `sh main.sh --vcf <path of vcf files> --ref <absolute pathname of reference file> --bed <absolute pathname of bed file> --gold <absolute pathname of the gold standard file> --out <output path> --acc <account name> --par <partition name>`
 
-Please refer to the detailed documentation by using the command `sh main.sh -h`.
+Other slurm options can also be used in conjunction. Please refer to the detailed documentation by using the command `sh main.sh -h` to see all the options that can be used.
 
 *N.B.: If you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr*
 
