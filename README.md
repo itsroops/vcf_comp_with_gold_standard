@@ -31,8 +31,7 @@ The outputs from the tool can be categorized into three forms, namely, *log file
    * *mainlog.txt*: This file is generated during the actual execution of the tool and it records all the steps in details.
    * *slurm-jobid.out*: There are several of these files which log the events of the slurm jobs which have been submitted to the scheduler. 
 
-2. The *parameters.txt* file is also generated which cotains the list of parameters which have been accepted by the user for running the program. It can be   
-   investigated in case of any discrepancy in the values of the parameters. This is also found in the $installation_path/vcf_comp_with_gold_standard folder.
+2. The *parameters.txt* file is also generated which cotains the list of parameters which have been accepted by the user for running the program. It can be investigated in case of any discrepancy in the values of the parameters. This is also found in the $installation_path/vcf_comp_with_gold_standard folder.
   
 3.  The *plot files* include the combined bar plots comparing the values for different metrices like recall, precision and  f1 scores for all the vcf files. 
     They are generated in the *pdf* format. These are generated in the output path which is specified by the user.
