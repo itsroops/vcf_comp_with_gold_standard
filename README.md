@@ -35,8 +35,10 @@ Please execute the script by running the command `sh main.sh`.
 The tool is run by the following command:
 `sh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]`
 
-The compulsory options are the *gold standard file*, *bed file*, *reference file*, *account* and *partition name*. 
-Please refer to the documenetation by using the command `sh main.sh -h`.
+The compulsory options are the *gold standard file*, *bed file*, *reference file*, *account* and *partition name*. Both long as well as the short options or a combiination of both can be used. Please refer to the detailed documentation by using the command `sh main.sh -h`.
+
+A sample command line run would look like the following:
+`sh main.sh --vcf <path of vcf files> --ref <absolute pathname of reference file> --bed <<absolute pathname of bed file>  --gold <<absolute pathname of the gold standard file> --out < output path> --acc <account name> --par <partition name> 
 
 *N.B.: If you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr*
 
