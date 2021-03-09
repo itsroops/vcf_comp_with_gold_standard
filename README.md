@@ -32,8 +32,13 @@ The usage is pretty simple and the interactive dialogs would guide in accepting 
 Please execute the script by running the command `sh main.sh`. 
 
 ### Command line mode
+The tool is run by the following command:
+`sh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]`
 
+The compulsory options are the *gold standard file*, *bed file*, *reference file*, *account* and *partition name*. 
+Please refer to the documenetation by using the command `sh main.sh -h`.
 
+*N.B.: If you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr*
 
 ## Outputs
 The outputs from the tool can be categorized into three forms, namely, *log files* and *plot files* and *other result files*.
