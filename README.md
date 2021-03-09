@@ -19,9 +19,17 @@ The installation process is pretty straightforward and can be achieved easily by
 *In case of installation failure: If you have to restart the installation process, please delete the **temp** folder that has been created by `rm -rf temp` and then begin fresh installation.*
 
 ## Running the tool
-The tool can be run either in 
+The tool can be run either in interactive mode or in the command line by passing the required arguments.
+Mandatory files required are:
+1. The set of VCF files stored in a single folder and all ending with .vcf extension. If the vcf files are in a compressed
+ form, please decompress the files and keep it in .vcf extension only.  
+2. A reference file eg. a fasta file
+3. A bed file ending with .bed extension.
+4. A gold standard file ending with .vcf extension
+
+### Interactive Mode
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
-Please execute the script `sh main.sh`
+Please execute the script `sh main.sh`. 
 
 ## Outputs
 The outputs from the tool can be categorized into three forms, namely, *log files* and *plot files* and *other result files*.
