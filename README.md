@@ -31,7 +31,7 @@ Mandatory files required are:
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
 Please execute the script by running the command `sh main.sh`. 
 
-### The command line mode
+### Command line mode
 
 
 
