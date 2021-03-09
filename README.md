@@ -19,7 +19,7 @@ The installation process is pretty straightforward and can be achieved easily by
 *In case of installation failure: If you have to restart the installation process, please delete the **temp** folder that has been created by `rm -rf temp` and then begin fresh installation.*
 
 ## Running the tool
-The tool can be run either in interactive mode or in the command line by passing the required arguments.
+The tool can either be run in the interactive mode or in the command line by passing the required arguments.
 Mandatory files required are:
 1. The set of VCF files stored in a single folder and all ending with .vcf extension. If the vcf files are in a compressed
  form, please decompress the files and keep it in .vcf extension only.  
