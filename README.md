@@ -27,9 +27,13 @@ Mandatory files required are:
 3. A bed file ending with .bed extension.
 4. A gold standard file ending with .vcf extension
 
-### Interactive Mode
+### Interactive mode
 The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
 Please execute the script by running the command `sh main.sh`. 
+
+### The command line mode
+
+
 
 ## Outputs
 The outputs from the tool can be categorized into three forms, namely, *log files* and *plot files* and *other result files*.
