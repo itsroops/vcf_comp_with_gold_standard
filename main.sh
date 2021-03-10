@@ -15,8 +15,8 @@ echo -e "                                       Author: Avirup Guha Neogi       
 echo -e "************************************************************************************************************"
 echo -e "\nThis is an interactive tool which will guide you to perform VCF comparisons"
 echo -e "\n*This tool will automatically install the hap.py tool for comparisons"
-echo -e "\n*Please keep all the VCF files to be compared (with the gold standard file) into a folder"
-echo -e "\n*The extension of the VCF must end with '.vcf'. If you use any compressor please decompress and place the normal '.vcf' files"
+echo -e "\n*Please keep all the VCF files (to be compared with the gold standard file) into a folder"
+echo -e "\n*The extension of the VCF files including the gold standard must end with '.vcf'. If you use any compressor please decompress and place the normal '.vcf' files"
 echo -e "\n*Other required files are bed file and a reference file"
 echo -e "\n*At any point of entering input, if you want to keep the default value, then press ENTER"
 echo -e "\n"
@@ -40,10 +40,16 @@ vcf_folder=${vcf_folder:-$curr_path}
 
 # Checking the validity of the argument
 if [[ $vcf_folder != /* ]] ; then
-   echo -e "\nInvalid argument for the vcf files path"
+   echo -e "\nInvalid argument for the vcf files path\n"
    echo -e "\nInvalid argument for the vcf files path......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
+
+elif [[ ! -d $vcf_folder ]] ; then
+     echo -e "\nThe vcf folder path does not exist\n"
+     echo -e "\nThe vcf folder path does not exist......" `date` >> mainlog.txt
+     echo -e "\nExiting the program......" `date` >> mainlog.txt
+     exit 1
 
 else
 echo -e "\nFolder of the VCF files read......" `date` >> mainlog.txt
@@ -54,12 +60,27 @@ fi
 echo -e "\nPlease enter the filename along with the full path for the gold standard file"
 read vcf_gold
 
+# Checking whether the argument is null or not
+
+if [[ -z $vcf_gold ]] ; then
+   echo -e "\nNull argument for the gold standard file\n"
+   echo -e "\nNull argument for the gold standard file......" `date` >> mainlog.txt
+   echo -e "\nExiting the program......" `date` >> mainlog.txt
+   exit 1
+
+
 # Checking the validity of the argument
-if [[ $vcf_gold != /*.vcf ]] ; then
-   echo -e "\nInvalid argument for the gold standard file"
+elif [[ $vcf_gold != /*.vcf ]] ; then
+   echo -e "\nInvalid argument for the gold standard file\n"
    echo -e "\nInvalid argument for the gold standard file......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
+
+elif [[	! -f $vcf_gold ]] ; then
+     echo -e "\nThe gold standard file does not exist\n"
+     echo -e "\nThe gold standard file does not exist......" `date` >> mainlog.txt
+     echo -e "\nExiting the program......" `date` >> mainlog.txt
+     exit 1
 
 else
 echo -e	"\nPath of the gold standard file read......" `date` >> mainlog.txt
@@ -70,12 +91,28 @@ fi
 echo -e "\nPlease enter the filename along with the full path for the bed file"
 read bed
 
+# Checking whether the argument is null or not
+if [[ -z $bed ]] ; then
+   echo -e "\nNull argument for the bed file\n"
+   echo -e "\nNull argument for the bed file......" `date` >> mainlog.txt
+   echo -e "\nExiting the program......" `date` >> mainlog.txt
+   exit 1
+
+
 # Checking the validity of the argument
-if [[ $bed != /*.bed ]] ; then
-   echo -e "\nInvalid argument for the bed file"
+elif [[ $bed != /*.bed ]] ; then
+   echo -e "\nInvalid argument for the bed file\n"
    echo -e "\nInvalid argument for the bed file......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
+
+
+elif [[ ! -f $bed ]] ; then
+     echo -e "\nThe bed file does not exist\n"
+     echo -e "\nThe bed file does not exist......" `date` >> mainlog.txt
+     echo -e "\nExiting the program......" `date` >> mainlog.txt
+     exit 1
+
 
 else
 echo -e	"\nPath of the bed file read......" `date` >> mainlog.txt
@@ -86,13 +123,26 @@ fi
 echo -e "\nPlease enter the filename along with the full path for the reference file"
 read ref
 
+if [[ -z $ref ]] ; then
+   echo -e "\nNull argument for the reference file\n"
+   echo -e "\nNull argument for the reference file......" `date` >> mainlog.txt
+   echo -e "\nExiting the program......" `date` >> mainlog.txt
+   exit 1
+
+
 # Checking the validity of the argument
-if [[ $ref != /*.* ]] ; then
-   echo -e "\nInvalid argument for the reference file"
+elif [[ $ref != /*.* ]] ; then
+   echo -e "\nInvalid argument for the reference file\n"
    echo -e "\nInvalid argument for the reference file......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
    
+elif [[ ! -f $ref ]] ; then
+     echo -e "\nThe reference file does not exist\n"
+     echo -e "\nThe reference file does not exist......" `date` >> mainlog.txt
+     echo -e "\nExiting the program......" `date` >> mainlog.txt
+     exit 1
+
 else
 echo -e "\nPath of the reference file read......" `date` >> mainlog.txt
 
@@ -105,10 +155,16 @@ out=${out:-$curr_path}
 
 # Checking the validity of the argument
 if [[ $out != /* ]] ; then
-   echo -e "\nInvalid argument for the output path"
+   echo -e "\nInvalid argument for the output path\n"
    echo -e "\nInvalid argument for the output path......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
+
+elif [[ ! -d $out ]] ; then
+     echo -e "\nThe output path does not exist\n"
+     echo -e "\nThe output path does not exist......" `date` >> mainlog.txt
+     echo -e "\nExiting the program......" `date` >> mainlog.txt
+     exit 1
 
 else
 echo -e "\nPath of the output folder read......" `date` >> mainlog.txt
@@ -148,7 +204,7 @@ cpt=${cpt:-1}
 
 # Checking the validity of the argument
 if [[ $cpt != [1-9]* || $cpt == *[aA-zZ]* ]] ; then
-   echo -e "\nInvalid argument for number of cpu(s) per task"
+   echo -e "\nInvalid argument for number of cpu(s) per task\n"
    echo -e "\nInvalid argument for number of cpu(s) per task......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
@@ -166,7 +222,7 @@ mem=${mem:-15G}
 
 # Checking the validity of the argument
 if [[ $mem != [0-9]* ]] ; then
-   echo -e "\nInvalid argument for the size of the memory required per node"
+   echo -e "\nInvalid argument for the size of the memory required per node\n"
    echo -e "\nInvalid argument for the size of the memory required per node......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
@@ -185,7 +241,7 @@ tot_time=${tot_time:-48:00:00}
 
 # Checking the validity of the input
 if [[ $tot_time != [0-9]* ]] ; then
-   echo -e "\nInvalid argument for total time of the slurm execution"
+   echo -e "\nInvalid argument for total time of the slurm execution\n"
    echo -e "\nInvalid argument for total time of the slurm execution......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
@@ -196,12 +252,12 @@ echo -e "\nTotal time allocation for the job read......" `date` >> mainlog.txt
 fi 
 
 # Reading the account name for the job
-echo -e "\nPlease enter the account name"
+echo -e "\nPlease enter the account name. Default: Default account name set by slurm for your account."
 read acc
 echo -e "\nAccount name read......" `date` >> mainlog.txt
 
 # Reading the partition name
-echo -e "\nPlease enter the partition name"
+echo -e "\nPlease enter the partition name. Default: Default partition name set by the slurm"
 read par
 echo -e "\nPartition name read......" `date` >> mainlog.txt
 
@@ -221,7 +277,7 @@ if [[ -z $mail_id ]] ; then
 
 
 elif [[ $mail_id != *@*.* ]] ; then
-   echo -e "\nInvalid Mail id"
+   echo -e "\nInvalid Mail id\n"
    echo -e "\nInvalid Mail id......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
@@ -253,13 +309,13 @@ echo -e "***********************************************************************
 function help() {
 clear
 echo -e "This is a tool to perform VCF comparisons"
-echo -e "Please keep all the VCF files to be compared (with the gold standard file) into a folder"
+echo -e "Please keep all the VCF files (to be compared with the gold standard file) into a folder"
 echo -e "The extension of the VCF must end with '.vcf'. If you use any compressor please decompress and place the normal '.vcf' files"
 echo -e "Other required files are bed file and a reference file"
 echo -e "\nYou can either use long or short options or a combination of both"
 echo -e "Format for using it is as follows:"
 echo -e "\n\033[1msh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]\033[0m"
-echo -e "\nThe compulsory options are the gold standard file, bed file and the reference files. Among the slurm options are account and partition names"
+echo -e "\nThe compulsory options are the gold standard file, bed file and the reference files."
 echo -e "\nIf you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr"
 echo -e "\nFollowing are the options for running in command line"
 echo -e "\n\033[1m--help\033[0m | \033[1m-help\033[0m | \033[1m-h\033[0m: Help"
@@ -352,10 +408,17 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $vcf_folder != /* ]] ; then
-        echo -e "\nInvalid argument for the vcf files path"
-        echo -e "\nInvalid argument for the vcf files path......" `date` >> mainlog.txt
-        echo -e "\nExiting the program......" `date` >> mainlog.txt
-        exit 1
+         echo -e "\nInvalid argument for the vcf files path\n"
+         echo -e "\nInvalid argument for the vcf files path......" `date` >> mainlog.txt
+         echo -e "\nExiting the program......" `date` >> mainlog.txt
+         exit 1
+
+      elif [[ ! -d $vcf_folder ]] ; then
+           echo -e "\nThe vcf folder path does not exist\n"
+           echo -e "\nThe vcf folder path does not exist......" `date` >> mainlog.txt
+           echo -e "\nExiting the program......" `date` >> mainlog.txt
+           exit 1
+
       fi
       ;;
     g)
@@ -363,21 +426,36 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $vcf_gold != /*.vcf ]] ; then
-        echo -e "\nInvalid argument for the gold standard file"
-        echo -e "\nInvalid argument for the gold standard file......" `date` >> mainlog.txt
-        echo -e "\nExiting the program......" `date` >> mainlog.txt
-        exit 1
+         echo -e "\nInvalid argument for the gold standard file\n"
+         echo -e "\nInvalid argument for the gold standard file......" `date` >> mainlog.txt
+         echo -e "\nExiting the program......" `date` >> mainlog.txt
+         exit 1
+      
+      elif [[ ! -f $vcf_gold ]] ; then
+           echo -e "\nThe gold standard file does not exist\n"
+           echo -e "\nThe gold standard file does not exist......" `date` >> mainlog.txt
+           echo -e "\nExiting the program......" `date` >> mainlog.txt
+           exit 1
+
       fi
+ 
       ;;
     r)
       ref=$OPTARG
     
       #	Checking the validity of the argument
       if [[ $ref != /*.* ]] ; then
-        echo -e "\nInvalid argument for the reference file"
-        echo -e "\nInvalid argument for the reference file......" `date` >> mainlog.txt
-        echo -e "\nExiting the program......" `date` >> mainlog.txt
-        exit 1
+         echo -e "\nInvalid argument for the reference file\n"
+         echo -e "\nInvalid argument for the reference file......" `date` >> mainlog.txt
+         echo -e "\nExiting the program......" `date` >> mainlog.txt
+         exit 1
+      
+      elif [[ ! -f $ref ]] ; then
+           echo -e "\nThe reference file does not exist\n"
+           echo -e "\nThe reference file does not exist......" `date` >> mainlog.txt
+           echo -e "\nExiting the program......" `date` >> mainlog.txt
+           exit 1
+
       fi
       ;;
     b)
@@ -385,10 +463,16 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $bed != /*.bed ]] ; then
-        echo -e "\nInvalid argument for the bed file"
-        echo -e "\nInvalid argument for the bed file......" `date` >> mainlog.txt
-        echo -e "\nExiting the program......" `date` >> mainlog.txt
-        exit 1
+         echo -e "\nInvalid argument for the bed file\n"
+         echo -e "\nInvalid argument for the bed file......" `date` >> mainlog.txt
+         echo -e "\nExiting the program......" `date` >> mainlog.txt
+         exit 1
+      
+      elif [[ ! -f $bed ]] ; then
+           echo -e "\nThe bed file does not exist\n"
+           echo -e "\nThe bed file does not exist......" `date` >> mainlog.txt
+           echo -e "\nExiting the program......" `date` >> mainlog.txt
+           exit 1
       fi
       ;;
     o)
@@ -396,10 +480,17 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $out != /* ]] ; then
-        echo -e "\nInvalid argument for the output path"
-        echo -e "\nInvalid argument for the output path......" `date` >> mainlog.txt
-        echo -e "\nExiting the program......" `date` >> mainlog.txt
-        exit 1
+         echo -e "\nInvalid argument for the output path\n"
+         echo -e "\nInvalid argument for the output path......" `date` >> mainlog.txt
+         echo -e "\nExiting the program......" `date` >> mainlog.txt
+         exit 1
+      
+      elif [[ ! -d $out ]] ; then
+           echo -e "\nThe output path does not exist\n"
+           echo -e "\nThe output path does not exist......" `date` >> mainlog.txt
+           echo -e "\nExiting the program......" `date` >> mainlog.txt
+           exit 1
+      
       fi
       ;;
     c)
@@ -418,7 +509,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $cpt != [1-9]* || $cpt == *[aA-zZ]* ]] ; then
-        echo -e "\nInvalid argument for number of cpu(s) per task"
+        echo -e "\nInvalid argument for number of cpu(s) per task\n"
         echo -e "\nInvalid argument for number of cpu(s) per task......" `date` >> mainlog.txt
         echo -e "\nExiting the program......" `date` >> mainlog.txt
         exit 1
@@ -429,7 +520,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
      
       # Checking the validity of the argument
       if [[ $mem != [0-9]* ]] ; then
-        echo -e "\nInvalid argument for the size of the memory required per node"
+        echo -e "\nInvalid argument for the size of the memory required per node\n"
         echo -e "\nInvalid argument for the size of the memory required per node......" `date` >> mainlog.txt
         echo -e "\nExiting the program......" `date` >> mainlog.txt
         exit 1
@@ -443,7 +534,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the input
       if [[ $tot_time != [0-9]* ]] ; then
-        echo -e "\nInvalid argument for total time of the slurm execution"
+        echo -e "\nInvalid argument for total time of the slurm execution\n"
         echo -e "\nInvalid argument for total time of the slurm execution......" `date` >> mainlog.txt
         echo -e "\nExiting the program......" `date` >> mainlog.txt
         exit 1
@@ -460,7 +551,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $mail_id != *@*.* ]] ; then
-        echo -e "\nInvalid Mail id"
+        echo -e "\nInvalid Mail id\n"
         echo -e "\nInvalid Mail id......" `date` >> mainlog.txt
         echo -e "\nExiting the program......" `date` >> mainlog.txt    
         exit 1
@@ -483,7 +574,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 done
 
 # Checking if all the mandatory arguments have been entered
-if [[ -z "$ref" || -z "$bed" || -z "$vcf_gold" || -z "$acc" || -z "$par" ]] ; then
+if [[ -z "$ref" || -z "$bed" || -z "$vcf_gold" ]] ; then
   echo -e "\nNot all the mandatory arguments are entered..."
   echo -e "\nNot all mandatory arguments are entered......" `date` >> mainlog.txt
   echo -e "\ntype 'sh main.sh -h' for help\n"
@@ -522,9 +613,7 @@ echo -e "\n" >> mainlog.txt
 # Proving executable permissions to the file for all
 chmod a+x generate_plots.sh
 
-# Executing the generation of plots script in the background by taking the variables from the current shell
-source ./generate_plots.sh &
+echo -e "\nThe parameter file is generated in the following path: $curr_path/parameters.txt\n\n"
 
-echo -e "\nYou can monitor the log in the following path: $curr_path/mainlog.txt"
-echo -e "\nThe parameter file is available in the following path: $curr_path/parameters.txt"
-echo -e "\nThe final plots would be available in the following path: $out\n"
+# Executing the generation of plots script in the background by taking the variables from the current shell
+source ./generate_plots.sh
