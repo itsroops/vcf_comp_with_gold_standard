@@ -68,6 +68,10 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 
 3. For **Slurm Workload Manager**: https://slurm.schedmd.com/quickstart.html
 
+## Acknowledgements
+
+This work is guided by Dr. Susanne Motameny and supported by Cologne Center for Genomics (CCG), Germany
+
 ## Contact
 For any queries/issues, please mail to *avirupgn@gmail.com*
 
