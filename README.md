@@ -23,7 +23,7 @@ The tool can either be run in the interactive mode or in the command line by pas
 Mandatory files required are:
 1. The set of VCF files stored in a single folder and all ending with .vcf extension. If the vcf files are in a compressed
  form, please decompress the files and keep it in .vcf extension only.  
-2. A reference file eg. a fasta file
+2. A genome reference fasta file
 3. A bed file ending with .bed extension.
 4. A gold standard file ending with .vcf extension
 
@@ -40,7 +40,7 @@ The tool is run by the following command:
 The compulsory options are the *gold standard file*, *bed file* and *reference file*. Both long as well as the short options or a combination of both can be used. 
 
 A sample command line run would look like the following:
-`sh main.sh --vcf <path of vcf files> --ref <absolute pathname of reference file> --bed <absolute pathname of bed file> --gold <absolute pathname of the gold standard file> --out <output path> --acc <account name> --par <partition name>`
+`sh main.sh --vcf <path of vcf files> --ref <absolute pathname of genome reference fasta file> --bed <absolute pathname of bed file> --gold <absolute pathname of the gold standard file> --out <output path> --acc <account name> --par <partition name>`
 
 Other slurm options can also be used in conjunction. Please refer to the detailed documentation by using the command `sh main.sh -h` to see all the options that can be used.
 
