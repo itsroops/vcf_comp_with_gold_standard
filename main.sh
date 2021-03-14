@@ -17,7 +17,7 @@ echo -e "\nThis is an interactive tool which will guide you to perform VCF compa
 echo -e "\n*This tool will automatically install the hap.py tool for comparisons"
 echo -e "\n*Please keep all the VCF files (to be compared with the gold standard file) into a folder"
 echo -e "\n*The extension of the VCF files including the gold standard must end with '.vcf'. If you use any compressor please decompress and place the normal '.vcf' files"
-echo -e "\n*Other required files are bed file and a reference file"
+echo -e "\n*Other required files are bed file and a genome reference fasta file"
 echo -e "\n*At any point of entering input, if you want to keep the default value, then press ENTER"
 echo -e "\n"
 read -p "Press ENTER to continue or CTRL+z to abort...."
@@ -119,32 +119,32 @@ echo -e	"\nPath of the bed file read......" `date` >> mainlog.txt
 
 fi
 
-# Reading the full path of the reference file
-echo -e "\nPlease enter the filename along with the full path for the reference file"
+# Reading the full path of the genome reference fasta file
+echo -e "\nPlease enter the filename along with the full path for the genome reference fasta file"
 read ref
 
 if [[ -z $ref ]] ; then
-   echo -e "\nNull argument for the reference file\n"
-   echo -e "\nNull argument for the reference file......" `date` >> mainlog.txt
+   echo -e "\nNull argument for the genome reference fasta file\n"
+   echo -e "\nNull argument for the genome reference fasta file......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
 
 
 # Checking the validity of the argument
-elif [[ $ref != /*.* ]] ; then
-   echo -e "\nInvalid argument for the reference file\n"
-   echo -e "\nInvalid argument for the reference file......" `date` >> mainlog.txt
+elif [[ $ref != /*.fasta ]] ; then
+   echo -e "\nInvalid argument for the genome reference fasta file\n"
+   echo -e "\nInvalid argument for the genome reference fasta file......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
    
 elif [[ ! -f $ref ]] ; then
-     echo -e "\nThe reference file does not exist\n"
-     echo -e "\nThe reference file does not exist......" `date` >> mainlog.txt
+     echo -e "\nThe genome reference fasta file does not exist\n"
+     echo -e "\nThe genome reference fasta file does not exist......" `date` >> mainlog.txt
      echo -e "\nExiting the program......" `date` >> mainlog.txt
      exit 1
 
 else
-echo -e "\nPath of the reference file read......" `date` >> mainlog.txt
+echo -e "\nPath of the genome reference fasta file read......" `date` >> mainlog.txt
 
 fi
 
@@ -315,7 +315,7 @@ echo -e "Other required files are bed file and a reference file"
 echo -e "\nYou can either use long or short options or a combination of both"
 echo -e "Format for using it is as follows:"
 echo -e "\n\033[1msh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]\033[0m"
-echo -e "\nThe compulsory options are the gold standard file, bed file and the reference files."
+echo -e "\nThe compulsory options are the gold standard file, bed file and the genome reference fasta files."
 echo -e "\nIf you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr"
 echo -e "\nFollowing are the options for running in command line"
 echo -e "\n\033[1m--help\033[0m | \033[1m-help\033[0m | \033[1m-h\033[0m: Help"
@@ -323,7 +323,7 @@ echo -e "\033[1m--version\033[0m | \033[1m-version\033[0m | \033[1m-v\033[0m: Ve
 echo -e "\033[1m--vcf\033[0m | \033[1m-f\033[0m: The folder path of the VCF files which need to be compared. Default:current directory"
 echo -e "\033[1m--gold\033[0m | \033[1m-g\033[0m: The filename along with the full path for the gold standard file"
 echo -e "\033[1m--bed\033[0m | \033[1m-b\033[0m: The filename along with the full path for the bed file"
-echo -e "\033[1m--ref\033[0m | \033[1m-r\033[0m: The filename along with the full path for the reference file"
+echo -e "\033[1m--ref\033[0m | \033[1m-r\033[0m: The filename along with the full path for the genome reference fasta file"
 echo -e "\033[1m--out\033[0m | \033[1m-o\033[0m: The output folder path. Default:current directory"
 echo -e "\n\033[1m--rem_chr\033[0m | \033[1m-c\033[0m: The option indicates whether the gold standard file contains the chromosomes as chr1, chr2, etc. Acceptable values are Y|y|other.Default value: N. Other values are automatically treated as N"
 echo -e "\n\033[1m--rem_chr_newfile\033[0m | \033[1m-k\033[0m: The option indicates whether one would like to replace the original gold standard file with the file after removing the characters 'chr' or whether one would like to create a new file with the removed characters. Acceptable values are Y|y|other. Default value: N. Any other value is automatically treated as N"
@@ -444,15 +444,15 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
       ref=$OPTARG
     
       #	Checking the validity of the argument
-      if [[ $ref != /*.* ]] ; then
-         echo -e "\nInvalid argument for the reference file\n"
-         echo -e "\nInvalid argument for the reference file......" `date` >> mainlog.txt
+      if [[ $ref != /*.fasta ]] ; then
+         echo -e "\nInvalid argument for the genome reference fasta file\n"
+         echo -e "\nInvalid argument for the genome reference fasta file......" `date` >> mainlog.txt
          echo -e "\nExiting the program......" `date` >> mainlog.txt
          exit 1
       
       elif [[ ! -f $ref ]] ; then
-           echo -e "\nThe reference file does not exist\n"
-           echo -e "\nThe reference file does not exist......" `date` >> mainlog.txt
+           echo -e "\nThe genome reference fasta file does not exist\n"
+           echo -e "\nThe genome reference fasta file does not exist......" `date` >> mainlog.txt
            echo -e "\nExiting the program......" `date` >> mainlog.txt
            exit 1
 
@@ -593,7 +593,7 @@ echo -e "-----------------------------------------------------------------------
 echo -e "\nCurrent path: $curr_path" >> parameters.txt
 echo "VCF folder path: $vcf_folder" >> parameters.txt
 echo "Gold standard file: $vcf_gold" >> parameters.txt
-echo "Reference file: $ref" >> parameters.txt
+echo "Genome reference fasta file: $ref" >> parameters.txt
 echo "Bed file: $bed" >> parameters.txt
 echo "Output path: $out" >> parameters.txt
 echo "Does the gold standard file contain 'chr' in the chromosome number?: $ch" >> parameters.txt
