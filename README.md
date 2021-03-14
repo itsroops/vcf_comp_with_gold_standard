@@ -37,7 +37,7 @@ Please execute the script by running the command `sh main.sh`.
 The tool is run by the following command:
 `sh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]`
 
-The compulsory options are the *gold standard file*, *bed file* and *reference file*. Both long as well as the short options or a combination of both can be used. 
+The compulsory options are the *gold standard file*, *bed file* and *genome reference fasta file*. Both long as well as the short options or a combination of both can be used. 
 
 A sample command line run would look like the following:
 `sh main.sh --vcf <path of vcf files> --ref <absolute pathname of genome reference fasta file> --bed <absolute pathname of bed file> --gold <absolute pathname of the gold standard file> --out <output path> --acc <account name> --par <partition name>`
