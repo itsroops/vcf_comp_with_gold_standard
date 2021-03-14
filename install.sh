@@ -105,4 +105,4 @@ h=$((secs/3600))
 m=$((secs%3600/60))
 s=$((secs%60))
 
-echo -e "\nThe total running time of the installation process is $h hour(s) $m minute(s) and $s second(s)"
+echo -e "\nThe total running time of the installation process is $h hour(s) $m minute(s) and $s second(s)\n"
