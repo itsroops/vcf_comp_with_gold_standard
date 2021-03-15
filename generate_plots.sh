@@ -14,13 +14,13 @@ do
 
 # Reading the filename
 file_name=`echo $var | rev | cut -d'/' -f 1 | rev`
-file_name=$out/$file_name
+file_name=$out/$out_name/$file_name
 
 # Declaring array for storing submitted jobs
 declare -a jobs
 
 # Submitting the jobs
-k=`sbatch vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --partition=$par --mail-type=$mail_type --mail-user=$mail_id -x raptor10201`
+k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --partition=$par --mail-type=$mail_type --mail-user=$mail_id vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
 
 echo $k
 echo $k......`date` >> mainlog.txt
