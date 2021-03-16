@@ -18,7 +18,7 @@ echo -e "\nNavigating to the temporary directory......"
 echo -e "\nDownloading the latest miniconda3 installer......"
 
 # Downloading the miniconda installer
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh --no-check-certificate
+wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 echo -e "\nStarting miniconda3 installation......"
 echo -e "\n"
@@ -42,7 +42,7 @@ echo -e "\nminiconda3 installation completed and it is installed in the minconda
 echo -e "\nStarting installation of cmake......"
 
 # Installing the cmake
-wget https://cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz --no-check-certificate
+wget --no-check-certificate https://cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz
 tar xf cmake-3.2.3-Linux-x86_64.tar.gz
 rm cmake-3.2.3-Linux-x86_64.tar.gz
 
