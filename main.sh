@@ -61,7 +61,6 @@ echo -e "\nPlease enter the filename along with the full path for the gold stand
 read vcf_gold
 
 # Checking whether the argument is null or not
-
 if [[ -z $vcf_gold ]] ; then
    echo -e "\nNull argument for the gold standard file\n"
    echo -e "\nNull argument for the gold standard file......" `date` >> mainlog.txt
@@ -76,6 +75,7 @@ elif [[ $vcf_gold != /*.vcf ]] ; then
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
 
+# Checking the existence of the gold standard file path
 elif [[	! -f $vcf_gold ]] ; then
      echo -e "\nThe gold standard file does not exist\n"
      echo -e "\nThe gold standard file does not exist......" `date` >> mainlog.txt
@@ -106,7 +106,7 @@ elif [[ $bed != /*.bed ]] ; then
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
 
-
+# Checking the existence of the bed file path
 elif [[ ! -f $bed ]] ; then
      echo -e "\nThe bed file does not exist\n"
      echo -e "\nThe bed file does not exist......" `date` >> mainlog.txt
@@ -123,6 +123,7 @@ fi
 echo -e "\nPlease enter the filename along with the full path for the genome reference fasta file"
 read ref
 
+# Checking if the argument is null
 if [[ -z $ref ]] ; then
    echo -e "\nNull argument for the genome reference fasta file\n"
    echo -e "\nNull argument for the genome reference fasta file......" `date` >> mainlog.txt
@@ -136,7 +137,8 @@ elif [[ $ref != /*.fasta ]] ; then
    echo -e "\nInvalid argument for the genome reference fasta file......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
-   
+
+# Checking the existence of the genome reference fasta file   
 elif [[ ! -f $ref ]] ; then
      echo -e "\nThe genome reference fasta file does not exist\n"
      echo -e "\nThe genome reference fasta file does not exist......" `date` >> mainlog.txt
@@ -148,26 +150,44 @@ echo -e "\nPath of the genome reference fasta file read......" `date` >> mainlog
 
 fi
 
+# Reading the output folder name
+echo -e "\nPlease enter the output folder name"
+read out_name
+
 # Reading the output folder path
-echo -e "\nPlease enter the output folder path. Default:current directory"
+echo -e "\nPlease enter the path where the output folder should be placed. Default: Current directory"
 read out
 out=${out:-$curr_path}
 
 # Checking the validity of the argument
 if [[ $out != /* ]] ; then
-   echo -e "\nInvalid argument for the output path\n"
-   echo -e "\nInvalid argument for the output path......" `date` >> mainlog.txt
+   echo -e "\nInvalid argument for the output folder path\n"
+   echo -e "\nInvalid argument for the output folder path......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
 
+# Checking the existence of the output folder path
 elif [[ ! -d $out ]] ; then
-     echo -e "\nThe output path does not exist\n"
-     echo -e "\nThe output path does not exist......" `date` >> mainlog.txt
+     echo -e "\nThe output folder path does not exist\n"
+     echo -e "\nThe output folder path does not exist......" `date` >> mainlog.txt
      echo -e "\nExiting the program......" `date` >> mainlog.txt
      exit 1
 
+# Checking if the output folder is non-empty
+elif [[ ! -z  $(ls -A $out/$out_name) ]] ; then
+     echo -e "\nThe output folder is not empty\n"
+     echo -e "\nThe output folder is not empty......" `date` >> mainlog.txt
+     echo -e "\nExiting the program......" `date` >> mainlog.txt
+     exit 1
+
+# Checking the existence of the output folder path
+elif [[ -d $out/$out_name ]] ; then
+     echo -e "\nPath of the output folder read......" `date` >> mainlog.txt
+
+# Creating the new output folder
 else
-echo -e "\nPath of the output folder read......" `date` >> mainlog.txt
+mkdir $out/$out_name
+echo -e "\nPath of the output folder read and a new folder named $out_name created......" `date` >> mainlog.txt
 
 fi
 
@@ -480,14 +500,14 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $out != /* ]] ; then
-         echo -e "\nInvalid argument for the output path\n"
-         echo -e "\nInvalid argument for the output path......" `date` >> mainlog.txt
+         echo -e "\nInvalid argument for the output folder path\n"
+         echo -e "\nInvalid argument for the output folder path......" `date` >> mainlog.txt
          echo -e "\nExiting the program......" `date` >> mainlog.txt
          exit 1
       
       elif [[ ! -d $out ]] ; then
-           echo -e "\nThe output path does not exist\n"
-           echo -e "\nThe output path does not exist......" `date` >> mainlog.txt
+           echo -e "\nThe output folder path does not exist\n"
+           echo -e "\nThe output folder path does not exist......" `date` >> mainlog.txt
            echo -e "\nExiting the program......" `date` >> mainlog.txt
            exit 1
       
@@ -595,17 +615,37 @@ echo "VCF folder path: $vcf_folder" >> parameters.txt
 echo "Gold standard file: $vcf_gold" >> parameters.txt
 echo "Genome reference fasta file: $ref" >> parameters.txt
 echo "Bed file: $bed" >> parameters.txt
-echo "Output path: $out" >> parameters.txt
+echo "Output folder path: $out/$out_name" >> parameters.txt
 echo "Does the gold standard file contain 'chr' in the chromosome number?: $ch" >> parameters.txt
 echo "For gold standard file containing 'chr' in the chromosome number, does the user want to create a new file with the removed 'chr' word?: $ch2" >> parameters.txt
+
 echo -e "\nSlurm Options:\n" >> parameters.txt
 echo "Number of cpu(s) per task: $cpt" >> parameters.txt
 echo "Amount of memory required per node: $mem" >> parameters.txt
 echo "The time limit on the total runtime of the job allocation: $tot_time" >> parameters.txt
-echo "The account name for the job: $acc" >> parameters.txt
-echo "The partition name: $par" >> parameters.txt
+
+# Checking if account name is null
+if [[ -z $acc ]] ; then
+   echo "The account name for the job: Default that is set by the cluster manager" >> parameters.txt
+else
+   echo "The account name for the job: $acc" >> parameters.txt
+fi
+
+# Checking if partition is null
+if [[ -z $par ]] ; then
+   echo "The partition name: Default that is set by the cluster manager" >> parameters.txt
+else
+   echo "The partition name: $par" >> parameters.txt
+fi
+
 echo "The mail type to notify users: $mail_type" >> parameters.txt
-echo "The user mail id to notify users: $mail_id" >> parameters.txt 
+
+# Checking if the mail id is null
+if [[ -z $mail_id ]] ; then
+   echo "The user mail id to notify users:  Default that is set by the cluster manager" >> parameters.txt
+else
+   echo "The user mail id to notify users: $mail_id" >> parameters.txt 
+fi
 
 echo -e "\nParameter file generated......" `date` >> mainlog.txt
 echo -e "\n" >> mainlog.txt
