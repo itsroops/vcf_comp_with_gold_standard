@@ -5,16 +5,15 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 
 ## Prerequisites
 
-1. This works in typical linux clusters having **slurm workload manager**. 
-2. Please be sure to have **make** program installed in your system. It can easily be checked using `which make`. This is required for building source codes.
-3. Please install **git** in the system.
-4. GCC/G++ 4.9.2+ for compiling
+1. Linux clusters having **slurm workload manager**. 
+2. Availability of **make** program. It can be checked using `which make`. This is required for building source codes.
+3. Availability of **git** program. It can be checked using `which git`. This is required for cloning the guthub repository.
 
 ## Installation
-The installation process is pretty straightforward and can be achieved easily by the following steps.
+Please execute the following steps.
 1. Execute the command `git clone https://github.com/itsroops/vcf_comp_with_gold_standard`
 2. Navigate to the directory by running `cd vcf_comp_with_gold_standard`
-3. Run the script by executing `sh start_install.sh`. This will take care of all the dependencies and will download them.
+3. Run the script by executing `sh start_install.sh`.
 
 *In case of installation failure: If you have to restart the installation process, please delete the **temp** folder that has been created by `rm -rf temp` and then begin fresh installation.*
 
@@ -27,11 +26,9 @@ Mandatory files required are:
 3. A bed file ending with .bed extension.
 4. A gold standard file ending with .vcf extension
 
-All relevant input data validations are in place for user's convenience.
 
 ### Interactive mode
-The usage is pretty simple and the interactive dialogs would guide in accepting all the relevant inputs.
-Please execute the script by running the command `sh main.sh`. 
+Run the tool by executing the command `sh main.sh`. 
 
 ### Command line mode
 The tool is run by the following command:
@@ -54,7 +51,7 @@ The outputs from the tool can be categorized into three forms, namely, *log file
    * *mainlog.txt*: This file is generated during the actual execution of the tool and it records all the steps in details.
    * *slurm-jobid.out*: There are several of these files which log the events of the slurm jobs which have been submitted to the scheduler. 
 
-2. The *parameters.txt* file is also generated which cotains the list of parameters which have been accepted by the user for running the program. It can be investigated in case of any discrepancy in the values of the parameters. This is also found in the $installation_path/vcf_comp_with_gold_standard folder.
+2. The *parameters.txt* file is also generated which cotains the list of parameters which have been passed by the user for running the program. This is also found in the $installation_path/vcf_comp_with_gold_standard folder.
   
 3.  The *plot files* include the combined bar plots comparing the values for different metrices like recall, precision and  f1 scores for all the vcf files. 
     They are generated in the *pdf* format. These are generated in the output path which is specified by the user.
