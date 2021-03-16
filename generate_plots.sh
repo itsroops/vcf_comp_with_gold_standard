@@ -19,8 +19,40 @@ file_name=$out/$out_name/$file_name
 # Declaring array for storing submitted jobs
 declare -a jobs
 
-# Submitting the jobs
-k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --partition=$par --mail-type=$mail_type --mail-user=$mail_id vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+# The case when the account, partition and mail_id parameters are null
+if [[ -z $acc && -z $par && -z $mail_id ]] ; then
+   k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --mail-type=$mail_type vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the account and  partition are null whereas mail_id parameters is not null
+elif [[ -z $acc && -z $par && ! -z $mail_id ]] ; then
+     k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --mail-type=$mail_type --mail-user=$mail_id vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the account and mail_id are null whereas the partition is not null
+elif [[	-z $acc	&& ! -z $par && -z $mail_id ]] ; then
+     k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time  --partition=$par --mail-type=$mail_type vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the account is null whereas partition and mail_id parameters are not null
+elif [[ -z $acc && ! -z $par && ! -z $mail_id ]] ; then
+     k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time  --partition=$par --mail-type=$mail_type --mail-user=$mail_id vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the partition and mail id are null whereas the account is not null
+elif [[ ! -z $acc && -z $par && -z $mail_id ]] ; then
+     k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --mail-type=$mail_type vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the partition is null whereas the account and mail_id are not null
+elif [[ ! -z $acc && -z $par && ! -z $mail_id ]] ; then
+     k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --mail-type=$mail_type --mail-user=$mail_id vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the account and partition parameters are not null and mail id is null
+elif [[ ! -z $acc && ! -z $par && -z $mail_id ]] ; then
+     k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --partition=$par --mail-type=$mail_type vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+# The case when the account, partition and mail id are not null
+else
+  k=`sbatch --cpus-per-task=$cpt --mem=$mem --time=$tot_time --account=$acc --partition=$par --mail-type=$mail_type --mail-user=$mail_id vcf_comp.sh $python_path $happy_path $vcf_gold $var $bed $file_name $ref`
+
+fi
+
 
 echo $k
 echo $k......`date` >> mainlog.txt
@@ -68,7 +100,7 @@ h=$((secs/3600))
 m=$((secs%3600/60))
 s=$((secs%60))
 
-echo -e "Please wait while the jobs are running.......Elapsed time is $h hour(s) : $m minute(s) : $s second(s)"
+echo -e "Please wait while the jobs are running.......Elapsed time for jobs is $h hour(s) : $m minute(s) : $s second(s)"
 
 sleep 2m
 
@@ -80,8 +112,18 @@ echo -e "\nAll the jobs are complete......"
 # Plotting the vcf comparison values
 $curr_path/temp/miniconda3/bin/python3 happy_plots.py $out
 
-echo -e "\nThe bar charts of the comparison are generated in the path $out......" `date` >> mainlog.txt
-echo -e "\nThe bar charts of the comparison are generated in the path $out......"
+# Checking if the output files are generated
+count=`ls -1 $out/$out_name/*.pdf 2>/dev/null | wc -l`
+
+if [[ $count == 0 ]] ; then
+   echo -e "\nThere is(are) some error(s) in the execution of jobs. The output files are not produced\n"
+   echo -e "\nThere is(are) some error(s) in the execution of jobs. The output files are not produced......" `date` >> mainlog.txt
+   exit	1
+fi
+
+
+echo -e "\nThe bar charts of the comparison are generated in the path $out/$out_name......" `date` >> mainlog.txt
+echo -e "\nThe bar charts of the comparison are generated in the path $out/$out_name......"
 
 end_time=$(date +"%s")
 
