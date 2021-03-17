@@ -174,7 +174,7 @@ elif [[ ! -d $out ]] ; then
      exit 1
 
 # Checking if the output folder is non-empty
-elif [[ ! -z  $(ls -A $out/$out_name) ]] ; then
+elif [[ -d $out/$out_name && ! -z  $(ls -A $out/$out_name) ]] ; then
      echo -e "\nThe output folder is not empty\n"
      echo -e "\nThe output folder is not empty......" `date` >> mainlog.txt
      echo -e "\nExiting the program......" `date` >> mainlog.txt
@@ -187,7 +187,7 @@ elif [[ -d $out/$out_name ]] ; then
 # Creating the new output folder
 else
 mkdir $out/$out_name
-echo -e "\nPath of the output folder read and a new folder named $out_name created......" `date` >> mainlog.txt
+echo -e "\nPath of the output folder read and a new folder named "$out_name" created......" `date` >> mainlog.txt
 
 fi
 
@@ -272,12 +272,12 @@ echo -e "\nTotal time allocation for the job read......" `date` >> mainlog.txt
 fi 
 
 # Reading the account name for the job
-echo -e "\nPlease enter the account name. Default: Default account name set by slurm for your account."
+echo -e "\nPlease enter the account name. Default: Default account name set by the cluster manager for your account."
 read acc
 echo -e "\nAccount name read......" `date` >> mainlog.txt
 
 # Reading the partition name
-echo -e "\nPlease enter the partition name. Default: Default partition name set by the slurm"
+echo -e "\nPlease enter the partition name. Default: Default partition name set by the cluster mannager."
 read par
 echo -e "\nPartition name read......" `date` >> mainlog.txt
 
