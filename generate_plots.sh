@@ -106,18 +106,27 @@ sleep 2m
 
 done
 
+# Checking if the jobs that are queued have run successfully or not
+count=`ls -1 $out/$out_name/*.summary.csv 2>/dev/null | wc -l`
+
+if [[ $count == 0 ]] ; then
+   echo -e "\nNone of the jobs have run successfully. Please check the slurm log files for details.\n"
+   echo -e "\nNone of the jobs have run successfully. Please check the slurm log files for details......." `date` >> mainlog.txt
+   exit 1
+fi
+
 echo -e "\nAll the jobs are complete......" `date` >> mainlog.txt
 echo -e "\nAll the jobs are complete......"
 
 # Plotting the vcf comparison values
-$curr_path/temp/miniconda3/bin/python3 happy_plots.py $out
+$curr_path/temp/miniconda3/bin/python3 happy_plots.py $out/$out_name
 
-# Checking if the output files are generated
+# Checking if the plots are generated successfully or not
 count=`ls -1 $out/$out_name/*.pdf 2>/dev/null | wc -l`
 
 if [[ $count == 0 ]] ; then
-   echo -e "\nThere is(are) some error(s) in the execution of jobs. The output files are not produced\n"
-   echo -e "\nThere is(are) some error(s) in the execution of jobs. The output files are not produced......" `date` >> mainlog.txt
+   echo -e "\nThere is(are) some error(s) in the generation of plot files.\n"
+   echo -e "\nThere is(are) some error(s) in the generation of plot files......" `date` >> mainlog.txt
    exit	1
 fi
 
