@@ -22,7 +22,7 @@ The tool can either be run in the interactive mode or in the command line by pas
 Mandatory files required are:
 1. The set of VCF files stored in a single folder and all ending with .vcf extension. If the vcf files are in a compressed
  form, please decompress the files and keep it in .vcf extension only.  
-2. A genome reference fasta file
+2. A genome reference fasta file ending with .fasta extension
 3. A bed file ending with .bed extension.
 4. A gold standard file ending with .vcf extension
 
