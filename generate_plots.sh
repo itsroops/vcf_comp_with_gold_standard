@@ -148,3 +148,5 @@ echo -e "\nThe total running time of the program is $h hour(s) $m minute(s) and 
 echo -e "\nThe total running time of the program is $h hour(s) $m minute(s) and $s second(s)"
 
 echo -e "\nThe log file is generated in the following path: $curr_path/mainlog.txt"
+
+exit 0
