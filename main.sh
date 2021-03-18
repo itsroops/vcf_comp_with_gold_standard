@@ -288,7 +288,7 @@ mail_type=${mail_type:-ALL}
 echo -e "\nMail type read......" `date` >> mainlog.txt
 
 # Reading the user mail id to notify users
-echo -e "\nPlease enter the user mail id to get notified"
+echo -e "\nPlease enter the user mail id to get notified. Default: The email id of your account set by the cluster manager."
 read mail_id
 
 # Checking the validity of the argument
