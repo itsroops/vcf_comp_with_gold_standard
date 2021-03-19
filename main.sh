@@ -52,7 +52,7 @@ elif [[ ! -d $vcf_folder ]] ; then
      exit 1
 
 else
-echo -e "\nFolder of the VCF files read......" `date` >> mainlog.txt
+    echo -e "\nFolder of the VCF files read......" `date` >> mainlog.txt
 
 fi
 
@@ -83,7 +83,7 @@ elif [[	! -f $vcf_gold ]] ; then
      exit 1
 
 else
-echo -e	"\nPath of the gold standard file read......" `date` >> mainlog.txt
+    echo -e	"\nPath of the gold standard file read......" `date` >> mainlog.txt
 
 fi
 
@@ -115,7 +115,7 @@ elif [[ ! -f $bed ]] ; then
 
 
 else
-echo -e	"\nPath of the bed file read......" `date` >> mainlog.txt
+    echo -e	"\nPath of the bed file read......" `date` >> mainlog.txt
 
 fi
 
@@ -186,29 +186,33 @@ elif [[ -d $out/$out_name ]] ; then
 
 # Creating the new output folder
 else
-mkdir $out/$out_name
-echo -e "\nPath of the output folder read and a new folder named "$out_name" created......" `date` >> mainlog.txt
+    mkdir $out/$out_name
+    echo -e "\nPath of the output folder read and a new folder named "$out_name" created......" `date` >> mainlog.txt
 
 fi
 
-echo -e "\nPlease mention whether the gold standard file contains the word 'chr' after the chromosome numbers"
-echo -e "\nEnter (Y/y) if 'chr' word is present. Default value is N"
-read ch
-ch=${ch:-N}
-f=0
+# Checking if the gold standard file contains 'chr' in its chromosome numbers
+x=`tail -n 1 $vcf_gold | cut -f1 | grep chr`
 
-if [[ $ch = [yY] ]] ; then
-f=1
-echo -e "\nDo you want to keep the original file and make a new file or replace the original file?"
-echo -e "\nPlease enter (Y/y) if you want to replace the original file. Default value is N"
-read ch2
-ch2=${ch2:-N}
+if [[ ! -z $x ]] ; then
+   ch=Y
+else
+   ch=N
+fi
 
-# Removing the "chr" from the chromosome numbers present in the gold standard file in order to make it compatible for comparison
-echo -e "\nPlease wait......"
-f_name=$($curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2 2>&1)
-echo -e "\nchr removed from the chromosome numbers......" `date` >> mainlog.txt
-vcf_gold=$f_name
+
+if [[ $ch == Y ]] ; then
+   echo -e "\nThe gold standard file contains 'chr' in their chromosome numbers. This would be removed in order to make it compatible for comparison"
+   echo -e "\nDo you want to keep the original file and make a new file or replace the original file?"
+   echo -e "\nPlease enter (Y/y) if you want to replace the original file. Default value is N"
+   read ch2
+   ch2=${ch2:-N}
+
+   # Removing the "chr" from the chromosome numbers present in the gold standard file in order to make it compatible for comparison
+   echo -e "\nPlease wait......"
+   f_name=$($curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2 2>&1)
+   echo -e "\nchr removed from the chromosome numbers......" `date` >> mainlog.txt
+   vcf_gold=$f_name
 
 fi
 
@@ -230,7 +234,7 @@ if [[ $cpt != [1-9]* || $cpt == *[aA-zZ]* ]] ; then
    exit 1
 
 else
-echo -e "\nNumber of CPU(s)-per-task read......" `date` >> mainlog.txt
+   echo -e "\nNumber of CPU(s)-per-task read......" `date` >> mainlog.txt
 
 fi
 
@@ -248,7 +252,7 @@ if [[ $mem != [0-9]* ]] ; then
    exit 1
 
 else
-echo -e "\nMemory required per node read......" `date` >> mainlog.txt
+   echo -e "\nMemory required per node read......" `date` >> mainlog.txt
 
 fi
 
@@ -267,7 +271,7 @@ if [[ $tot_time != [0-9]* ]] ; then
    exit 1
 
 else
-echo -e "\nTotal time allocation for the job read......" `date` >> mainlog.txt
+   echo -e "\nTotal time allocation for the job read......" `date` >> mainlog.txt
 
 fi 
 
@@ -303,7 +307,7 @@ elif [[ $mail_id != *@*.* ]] ; then
    exit 1
 
 else
-echo -e "\nMail id read......" `date` >> mainlog.txt
+   echo -e "\nMail id read......" `date` >> mainlog.txt
 
 fi
 
