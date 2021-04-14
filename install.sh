@@ -62,6 +62,10 @@ $conda_path/conda create -n happy -y python=2
 echo -e "\nInstalling the required packages for the python2 conda environment......"
 echo -e "\n"
 
+# Adding channels for installing packages
+$conda_path/conda config --add channels bioconda
+$conda_path/conda config --add channels conda-forge
+
 # Installing the required packages for the python 2 environment
 $conda_path/conda install -n happy -y boost pandas scipy pysam bx-python
 
