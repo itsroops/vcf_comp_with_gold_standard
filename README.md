@@ -5,9 +5,10 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 
 ## Prerequisites
 
-1. Linux clusters having **slurm workload manager**. 
-2. Availability of **make** program. It can be checked using `which make`. This is required for building source codes.
-3. Availability of **git** program. It can be checked using `which git`. This is required for cloning the guthub repository.
+1. GCC/G++ 4.9.2+ for compiling
+2. Linux clusters having **slurm workload manager**. 
+3. Availability of **make** program. It can be checked using `which make`. This is required for building source codes.
+4. Availability of **git** program. It can be checked using `which git`. This is required for cloning the guthub repository.
 
 ## Installation
 Please execute the following steps.
