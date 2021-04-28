@@ -157,8 +157,10 @@ def happy_plots():
         ax.set_xlabel('File Names',fontweight ='bold')
         ax.set_title(title[c])
         ax.set_xticks(x)
+        ax.set_ylim([0,1])
         ax.set_xticklabels(labels, rotation=90)
         ax.legend()
+        plt.yticks([0.00,0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95,1.00])
         plt.savefig(filepath  + "/" + title[c] + ".pdf", format="pdf", bbox_inches = 'tight')
         plt.ioff()
 
