@@ -11,7 +11,7 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 4. Availability of **git** program. It can be checked using `which git`. This is required for cloning the guthub repository.
 
 ## Installation
-Please execute the following steps.
+Following are the steps of installation:
 1. Execute the command `git clone https://github.com/itsroops/vcf_comp_with_gold_standard`
 2. Navigate to the directory by running `cd vcf_comp_with_gold_standard`
 3. Run the script by executing `sh start_install.sh`.
