@@ -29,7 +29,7 @@ Mandatory files required are:
 
 
 ### Interactive mode
-Run the tool by executing the command `sh main.sh`. 
+Run the tool by executing the command `sh main.sh`
 
 ### Command line mode
 The tool is run by the following command:
