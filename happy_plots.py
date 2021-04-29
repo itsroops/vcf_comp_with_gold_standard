@@ -10,17 +10,37 @@ import numpy as np
 
 
 def autolabel(rects,ax):
-            """Attaching a text label above each bar in *rects*, displaying its height."""
-            for rect in rects:
-                height = rect.get_height()
-                ax.annotate('{}'.format(height),
-                            xy=(rect.get_x() + rect.get_width() / 2, height),
-                            xytext=(0, 3),  # 3 points vertical offset
-                            textcoords="offset points",
-                            ha='center', va='bottom')
+    """
+    Attaching a text label above each bar in *rects*, displaying its height.
+            
+    Parameters: 
+    rects: Individual bar plot object
+    ax: The object for each subplot.
+            
+    Returns:
+    Does not return anything
+            
+    """
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
 
 
 def happy_plots():
+    """
+    Plots the combined barplots of the performance metrices for all the VCFs for both SNPs and Indels
+            
+    Parameters: 
+    None of the paramennters are required
+    
+    Returns:
+    Does not return anything
+            
+    """
     
     # Selecting the files that need to be compared
     filepath=sys.argv[1]
