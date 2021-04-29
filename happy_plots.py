@@ -9,6 +9,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def autolabel(rects,ax):
+            """Attaching a text label above each bar in *rects*, displaying its height."""
+            for rect in rects:
+                height = rect.get_height()
+                ax.annotate('{}'.format(height),
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, 3),  # 3 points vertical offset
+                            textcoords="offset points",
+                            ha='center', va='bottom')
+
+
 def happy_plots():
     
     # Selecting the files that need to be compared
@@ -136,7 +147,7 @@ def happy_plots():
     x = np.arange(len(labels))  
 
     # Setting the width of the bars
-    width = 0.35  
+    width = 0.2  
 
     k=0
 
@@ -164,20 +175,69 @@ def happy_plots():
         plt.savefig(filepath  + "/" + title[c] + ".pdf", format="pdf", bbox_inches = 'tight')
         plt.ioff()
 
+        autolabel(rects1,ax)
+        autolabel(rects2,ax)
 
-        def autolabel(rects):
-            """Attaching a text label above each bar in *rects*, displaying its height."""
-            for rect in rects:
-                height = rect.get_height()
-                ax.annotate('{}'.format(height),
-                            xy=(rect.get_x() + rect.get_width() / 2, height),
-                            xytext=(0, 3),  # 3 points vertical offset
-                            textcoords="offset points",
-                            ha='center', va='bottom')
+        fig.tight_layout()
 
+        plt.show()
+        
+        
+        # Second Part
 
-        autolabel(rects1)
-        autolabel(rects2)
+    # Setting the y-axis labels for the plots
+    ylabels=['Metrics Scores','Metrics Scores','Metrics Scores','Metrics Scores']
+
+    # Setting the title of the combined bar plots
+    title=['Bar_Chart_for_ALL_for_Type=Indel','Bar_Chart_for_ALL_for_Type=SNP',
+           'Bar_Chart_for_PASS_for_Type=Indel','Bar_Chart_for_PASS_for_Type=SNP']
+
+    
+    data = [metric_precision_i_all, metric_recall_i_all, metric_f1_i_all, metric_precision_s_all, 
+            metric_recall_s_all, metric_f1_s_all, metric_precision_i_pass, metric_recall_i_pass,
+            metric_f1_i_pass, metric_f1_i_pass, metric_recall_s_pass, metric_f1_i_pass]
+    
+    # Setting the legends for the combined bar plots
+    plot_labels1=['Precision','Precision','Precision','Precision']
+    plot_labels2=['Recall','Recall','Recall','Recall']
+    plot_labels3=['F1 Score','F1 Score','F1 Score','F1 Score']
+
+    # Setting the label locations
+    x = np.arange(len(labels))  
+
+    # Setting the width of the bars
+    width = 0.2  
+
+    k=0
+
+     # Plotting the combined bar plots
+    for c in range(len(title)):
+
+        # Setting the plot size for each plot
+        fig, ax = plt.subplots(figsize =(10, 7))
+
+        # Drawing the bars of its correspondng data
+        rects1 = ax.bar(x - width, data[k], width, label=plot_labels1[c])
+        rects2 = ax.bar(x, data[k+1], width, label=plot_labels2[c])
+        rects3 = ax.bar(x + width, data[k+2], width, label=plot_labels3[c])
+
+        k=k+3
+
+        # Adding some text for labels, title and custom x-axis tick labels, etc.
+        ax.set_ylabel(ylabels[c],fontweight ='bold')
+        ax.set_xlabel('File Names',fontweight ='bold')
+        ax.set_title(title[c])
+        ax.set_xticks(x)
+        ax.set_ylim([0,1])
+        ax.set_xticklabels(labels, rotation=90)
+        ax.legend()
+        plt.yticks([0.00,0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95,1.00])
+        plt.savefig(filepath  + "/" + title[c] + ".pdf", format="pdf", bbox_inches = 'tight')
+        plt.ioff()
+        
+        autolabel(rects1,ax)
+        autolabel(rects2,ax)
+        autolabel(rects3,ax)
 
         fig.tight_layout()
 
