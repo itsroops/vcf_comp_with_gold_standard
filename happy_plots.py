@@ -146,6 +146,9 @@ def happy_plots():
         labels.append(p)
 
 
+        
+    # Plotting for combined barplots with for SNPs and Indels for each individual performance metrices in different plots
+        
     # Setting the y-axis labels for the plots
     ylabels=['Recall','Recall','Precision','Precision', 'F1 Score','F1 Score']
 
@@ -203,7 +206,7 @@ def happy_plots():
         plt.show()
         
         
-        # Second Part
+    # Plotting for combined barplots with all performance metrices for SNPs and Indels
 
     # Setting the y-axis labels for the plots
     ylabels=['Metrics Scores','Metrics Scores','Metrics Scores','Metrics Scores']
