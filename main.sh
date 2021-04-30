@@ -14,13 +14,12 @@ echo -e "\n                             VCF files Comparison tool with gold stan
 echo -e "                                       Author: Avirup Guha Neogi                                  "
 echo -e "************************************************************************************************************"
 echo -e "\nThis is an interactive tool which will guide you to perform VCF comparisons"
-echo -e "\n*This tool will automatically install the hap.py tool for comparisons"
 echo -e "\n*Please keep all the VCF files (to be compared with the gold standard file) into a folder"
 echo -e "\n*The extension of the VCF files including the gold standard must end with '.vcf'. If you use any compressor please decompress and place the normal '.vcf' files"
 echo -e "\n*Other required files are bed file and a genome reference fasta file"
 echo -e "\n*At any point of entering input, if you want to keep the default value, then press ENTER"
 echo -e "\n"
-read -p "Press ENTER to continue or CTRL+z to abort...."
+read -p "Press ENTER to continue or CTRL+c to abort...."
 
 start_time=$(date +"%s")
 
@@ -83,7 +82,7 @@ elif [[	! -f $vcf_gold ]] ; then
      exit 1
 
 else
-    echo -e	"\nPath of the gold standard file read......" `date` >> mainlog.txt
+    echo -e "\nPath of the gold standard file read......" `date` >> mainlog.txt
 
 fi
 
@@ -115,7 +114,7 @@ elif [[ ! -f $bed ]] ; then
 
 
 else
-    echo -e	"\nPath of the bed file read......" `date` >> mainlog.txt
+    echo -e "\nPath of the bed file read......" `date` >> mainlog.txt
 
 fi
 
@@ -296,18 +295,14 @@ echo -e "\nPlease enter the email address to get notified. Default: The email ad
 read mail_id
 
 # Checking the validity of the argument
-if [[ -z $mail_id ]] ; then
-   echo -e "\nMail id read......" `date` >> mainlog.txt
-
-
-elif [[ $mail_id != *@*.* ]] ; then
-   echo -e "\nInvalid Mail id\n"
-   echo -e "\nInvalid Mail id......" `date` >> mainlog.txt
+if [[ $mail_id != *@*.* ]] ; then
+   echo -e "\nInvalid Email Address\n"
+   echo -e "\nInvalid Email Address......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
    exit 1
 
 else
-   echo -e "\nMail id read......" `date` >> mainlog.txt
+   echo -e "\nEmail address read......" `date` >> mainlog.txt
 
 fi
 
@@ -576,7 +571,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
       # Checking the validity of the argument
       if [[ $mail_id != *@*.* ]] ; then
         echo -e "\nInvalid Email Address\n"
-        echo -e "\nInvalid Email Addesss......" `date` >> mainlog.txt
+        echo -e "\nInvalid Email Address......" `date` >> mainlog.txt
         echo -e "\nExiting the program......" `date` >> mainlog.txt    
         exit 1
       fi
@@ -646,9 +641,9 @@ echo "The mail type to notify users: $mail_type" >> parameters.txt
 
 # Checking if the mail id is null
 if [[ -z $mail_id ]] ; then
-   echo "The user mail id to notify users:  Default that is set by the cluster manager" >> parameters.txt
+   echo "The email address to notify user:  Default that is set by the cluster manager" >> parameters.txt
 else
-   echo "The user mail id to notify users: $mail_id" >> parameters.txt 
+   echo "The email address to notify user: $mail_id" >> parameters.txt 
 fi
 
 echo -e "\nParameter file generated......" `date` >> mainlog.txt
