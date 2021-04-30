@@ -9,6 +9,8 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 2. Linux clusters having **slurm workload manager**. 
 3. Availability of **make** program. It can be checked using `which make`. This is required for building source codes.
 4. Availability of **git** program. It can be checked using `which git`. This is required for cloning the guthub repository.
+5. Availability of **wget** program. It can be checked using `which wget`. This is required for downloading files.
+6. Availability of **tar** program. It can be checked using `which tar`. This is required for extracting compressed files.
 
 ## Installation
 Following are the steps of installation:
