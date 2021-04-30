@@ -292,7 +292,7 @@ mail_type=${mail_type:-ALL}
 echo -e "\nMail type read......" `date` >> mainlog.txt
 
 # Reading the user mail id to notify users
-echo -e "\nPlease enter the user mail id to get notified. Default: The email id of your account set by the cluster manager."
+echo -e "\nPlease enter the email address to get notified. Default: The email address of your account set by the cluster manager."
 read mail_id
 
 # Checking the validity of the argument
@@ -575,8 +575,8 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       # Checking the validity of the argument
       if [[ $mail_id != *@*.* ]] ; then
-        echo -e "\nInvalid Mail id\n"
-        echo -e "\nInvalid Mail id......" `date` >> mainlog.txt
+        echo -e "\nInvalid Email Address\n"
+        echo -e "\nInvalid Email Addesss......" `date` >> mainlog.txt
         echo -e "\nExiting the program......" `date` >> mainlog.txt    
         exit 1
       fi
