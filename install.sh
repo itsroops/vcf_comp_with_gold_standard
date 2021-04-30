@@ -80,7 +80,7 @@ echo -e "\n"
 
 # Downloading the hap.py tool version 0.3.14
 
-wget https://api.github.com/repos/Illumina/hap.py/tarball/v0.3.14
+wget --no-check-certificate https://api.github.com/repos/Illumina/hap.py/tarball/v0.3.14
 tar -xzf v0.3.14
 rm v0.3.14
 mv Illumina-hap.py-79de3c7 hap.py
