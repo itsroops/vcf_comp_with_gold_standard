@@ -59,7 +59,7 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 3.  The *plot files* include the combined bar plots comparing the values for different metrices like recall, precision and  f1 scores for all the vcf files. 
     They are generated in the *pdf* format. These are generated in the output path which is specified by the user.
 
-4.  The *other result files* contain outputs from the *hap.py* tool run. These are generated in the output path which is specified by the user.
+4.  The *other result files* contain outputs from the *hap.py* tool run. These are also generated in the output path which is specified by the user.
 
 ## References
 1. For the **hap.py** tool: https://github.com/Illumina/hap.py
