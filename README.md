@@ -37,14 +37,14 @@ Run the tool by executing the command `sh main.sh`
 The tool is run by the following command:
 `sh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]`
 
-The compulsory options are the *gold standard file*, *bed file* and *genome reference fasta file*. Both long as well as the short options or a combination of both can be used. 
+The compulsory options are the *gold standard file*, *bed file* and *genome reference fasta file* and the *output folder name*. Both long as well as the short options or a combination of both can be used. 
 
 A sample command line run would look like the following:
-`sh main.sh --vcf <path of vcf files> --ref <absolute pathname of genome reference fasta file> --bed <absolute pathname of bed file> --gold <absolute pathname of the gold standard file> --out <output path> --acc <account name> --par <partition name>`
+`sh main.sh --vcf <path of vcf files> --ref <absolute pathname of genome reference fasta file> --bed <absolute pathname of bed file> --gold <absolute pathname of the gold standard file> --out_name <output folder name> --out <output path> --acc <account name> --par <partition name>`
 
 Other slurm options can also be used in conjunction. Please refer to the detailed documentation by using the command `sh main.sh -h` to see all the options that can be used.
 
-*N.B.: If you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr*
+*N.B.: If you have to enter both --out_name and --out, then make sure to use the --out_name flag before --out*
 
 ## Outputs
 The outputs from the tool can be categorized into three forms, namely, *log files* and *plot files* and *other result files*.
