@@ -334,8 +334,7 @@ echo -e "Other required files are bed file and a reference file"
 echo -e "\nYou can either use long or short options or a combination of both"
 echo -e "Format for using it is as follows:"
 echo -e "\n\033[1msh main.sh [option 1] [argument 1] [option 2] [argument 2]....[option n] [argument n]\033[0m"
-echo -e "\nThe compulsory options are the gold standard file, bed file and the genome reference fasta files."
-echo -e "\nIf you have to enter both --rem_chr=Y|y and --rem_chr_newfile=Y|y, then make sure to use the --rem_chr_newfile flag before --rem_chr"
+echo -e "\nThe compulsory options are the gold standard file, bed file and the genome reference fasta files and the output folder name."
 echo -e "\nFollowing are the options for running in command line"
 echo -e "\n\033[1m--help\033[0m | \033[1m-help\033[0m | \033[1m-h\033[0m: Help"
 echo -e "\033[1m--version\033[0m | \033[1m-version\033[0m | \033[1m-v\033[0m: Version" 
@@ -343,8 +342,8 @@ echo -e "\033[1m--vcf\033[0m | \033[1m-f\033[0m: The folder path of the VCF file
 echo -e "\033[1m--gold\033[0m | \033[1m-g\033[0m: The filename along with the full path for the gold standard file"
 echo -e "\033[1m--bed\033[0m | \033[1m-b\033[0m: The filename along with the full path for the bed file"
 echo -e "\033[1m--ref\033[0m | \033[1m-r\033[0m: The filename along with the full path for the genome reference fasta file"
-echo -e "\033[1m--out\033[0m | \033[1m-o\033[0m: The output folder path. Default:current directory"
-echo -e "\n\033[1m--rem_chr\033[0m | \033[1m-c\033[0m: The option indicates whether the gold standard file contains the chromosomes as chr1, chr2, etc. Acceptable values are Y|y|other.Default value: N. Other values are automatically treated as N"
+echo -e "\033[1m--out_name\033[0m | \033[1m-c\033[0m: The output folder name"
+echo -e "\033[1m--out\033[0m | \033[1m-o\033[0m: The output folder path. Default:current directory. Please note: option --out must be entered before output folder path"
 echo -e "\n\033[1m--rem_chr_newfile\033[0m | \033[1m-k\033[0m: The option indicates whether one would like to replace the original gold standard file with the file after removing the characters 'chr' or whether one would like to create a new file with the removed characters. Acceptable values are Y|y|other. Default value: N. Any other value is automatically treated as N"
 echo -e "\n\033[1m--cpt\033[0m | \033[1m-n\033[0m: The number of CPUs-per-task"
 echo -e "\n\033[1m--mem\033[0m | \033[1m-s\033[0m: The memory required per node.Default units are in MB. Different units can be specified using the suffix [K|M|G|T]. Default value set is 15G"
@@ -352,7 +351,7 @@ echo -e "\n\033[1m--tot_time\033[0m | \033[1m\033[1m-t\033[0m: The total time al
 echo -e "\n\033[1m--acc\033[0m | \033[1m-a\033[0m: The account name"
 echo -e "\033[1m--par\033[0m | \033[1m-p\033[0m: The partition name"
 echo -e "\033[1m--mail_type\033[0m | \033[1m-m\033[0m: The mail type to notify users when certain event occurs. Default is ALL"
-echo -e "\033[1m--mail_id\033[0m | \033[1m-e\033[0m: The user mail id to get notified"
+echo -e "\033[1m--mail_id\033[0m | \033[1m-e\033[0m: The user email address to get notified"
 }
 
 # Recording the start time of the process
@@ -385,12 +384,6 @@ tot_time=48:00:00
 # Setting the deafult mail type to notify users when certain event occurs
 mail_type=ALL
 
-# Setting the dafault value of remove chromosome
-ch=N
-
-# Setting the default for the option that asks whether the new file formed after removing chromosome has to be replaced with the old file or not
-ch2=N
-
 # Accepting the long options from the  user and converting it to short form
 for arg in "$@"; do
  shift
@@ -401,8 +394,8 @@ for arg in "$@"; do
    "--gold") set -- "$@" "-g" ;;
    "--ref") set -- "$@" "-r" ;;
    "--bed") set -- "$@" "-b" ;;
-   "--rem_chr") set -- "$@" "-c" ;;
    "--rem_chr_newfile") set -- "$@" "-k" ;;
+   "--out_name") set -- "$@" "-c" ;;
    "--out") set -- "$@" "-o" ;;
    "--cpt") set -- "$@" "-n" ;;
    "--mem") set -- "$@" "-s" ;;
@@ -422,6 +415,7 @@ OPTIND=1
 # Executing the short options that have been accepted from the user
 while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
   case $opt in
+  
     f)
       vcf_folder=$OPTARG 
 
@@ -440,6 +434,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       fi
       ;;
+  
     g)
       vcf_gold=$OPTARG
 
@@ -455,10 +450,19 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
            echo -e "\nThe gold standard file does not exist......" `date` >> mainlog.txt
            echo -e "\nExiting the program......" `date` >> mainlog.txt
            exit 1
-
+      
       fi
- 
+
+      # Checking if the gold standard file contains 'chr' in its chromosome numbers
+      x=`tail -n 1 $vcf_gold | cut -f1 | grep chr`
+
+      if [[ ! -z $x ]] ; then
+        ch=Y
+      else
+        ch=N
+      fi
       ;;
+
     r)
       ref=$OPTARG
     
@@ -477,6 +481,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 
       fi
       ;;
+
     b)
       bed=$OPTARG
 
@@ -494,35 +499,69 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
            exit 1
       fi
       ;;
-    o)
-      out=$OPTARG
 
+     c) 
+      out_name=$OPTARG
+      ;;
+
+     o)
+      out=$OPTARG
+      if [[ -z $out_name ]]; then
+         echo -e "\nThe output folder name option --out_name must be given before the output folder path\n"
+         echo -e "\nThe output folder name option --out_name must be given before the output folder path......" `date` >> mainlog.txt
+         echo -e "\nExiting the program......" `date` >> mainlog.txt
+         echo -e "\nType 'sh main.sh -h' for help\n"
+         exit 1
+      fi
       # Checking the validity of the argument
       if [[ $out != /* ]] ; then
          echo -e "\nInvalid argument for the output folder path\n"
          echo -e "\nInvalid argument for the output folder path......" `date` >> mainlog.txt
          echo -e "\nExiting the program......" `date` >> mainlog.txt
          exit 1
-      
+
+      # Checking the existence of the output folder path
       elif [[ ! -d $out ]] ; then
            echo -e "\nThe output folder path does not exist\n"
            echo -e "\nThe output folder path does not exist......" `date` >> mainlog.txt
            echo -e "\nExiting the program......" `date` >> mainlog.txt
            exit 1
-      
+
+      # Checking if the output folder is non-empty
+      elif [[ -d $out/$out_name && ! -z  $(ls -A $out/$out_name) ]] ; then
+           echo -e "\nThe output folder is not empty\n"
+           echo -e "\nThe output folder is not empty......" `date` >> mainlog.txt
+           echo -e "\nExiting the program......" `date` >> mainlog.txt
+           exit 1
+
+      # Checking the existence of the output folder path
+      elif [[ -d $out/$out_name ]] ; then
+           true
+
+      # Creating the new output folder
+      else
+          mkdir $out/$out_name
+          echo -e "\nA new output folder named "$out_name" is created in the path $out......" `date` >> mainlog.txt
+
       fi
       ;;
-    c)
-      ch=$OPTARG
-      if [[ $ch = [yY] ]] ; then
-        echo -e "\nPlease wait............"
-        f_name=$($curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2 2>&1)
-        vcf_gold=$f_name
-      fi
-      ;;
+    
     k)
       ch2=$OPTARG
+     
+      if [[ $ch != Y ]]; then
+        echo -e "\nInvalid option --rem_chr_newfile as the gold standard file does not contain 'chr' in the chromosome number\n"
+        echo -e "\nInvalid option --rem_chr_newfile as the gold standard file does not contain 'chr' in the chromosome number\n......" `date` >> mainlog.txt
+        echo -e "\nExiting the program......" `date` >> mainlog.txt
+        exit 1
+      fi
+
+      echo -e "\nPlease wait............"
+      f_name=$($curr_path/temp/miniconda3/bin/python3 remove_chr.py $vcf_gold $ch2 2>&1)
+      vcf_gold=$f_name
+      
       ;;
+
     n)
       cpt=$OPTARG
 
@@ -534,6 +573,7 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
         exit 1
       fi
       ;;
+   
     s)
       mem=$OPTARG
      
@@ -545,9 +585,11 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
         exit 1
       fi
       ;;
+    
     p)
       par=$OPTARG
       ;;
+    
     t)
       tot_time=$OPTARG
 
@@ -559,12 +601,15 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
         exit 1
       fi
       ;;
+    
     m)
       mail_type=$OPTARG
       ;;
+    
     a)
       acc=$OPTARG
       ;;
+    
     e)
       mail_id=$OPTARG
 
@@ -576,16 +621,19 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
         exit 1
       fi
       ;;
+    
     h)
       help
       echo -e "\nExiting the program......" `date` >> mainlog.txt
       exit 0;;
+    
     v)
       version
       echo -e "\nExiting the program......" `date` >> mainlog.txt
       exit 0;;  
+    
     *)
-      echo -e "\ntype 'sh main.sh -h' for help"
+      echo -e "\nType 'sh main.sh -h' for help"
       echo -e "\nExiting the program......" `date` >> mainlog.txt
       exit 1
       ;;
@@ -593,10 +641,19 @@ while getopts "f:g:r:b:o:c:k:n:s:p:t:m:a:e:hv" opt; do
 done
 
 # Checking if all the mandatory arguments have been entered
-if [[ -z "$ref" || -z "$bed" || -z "$vcf_gold" ]] ; then
+
+if [[ $ch == Y && -z $ch2 ]]; then
+  echo -e "\nThe reference file contains 'chr' in the chromosome number. Hence, --rem_chr_newfile option is mandatory"
+  echo -e "\nThe reference file contains 'chr' in the chromosome number. Hence, --rem_chr_newfile option is mandatory......" `date` >> mainlog.txt
+  echo -e "\nType 'sh main.sh -h' for help\n"
+  echo -e "\nExiting the program......" `date` >> mainlog.txt
+  exit 1
+fi
+
+if [[ -z "$ref" || -z "$bed" || -z "$vcf_gold" || -z "$out" ]] ; then
   echo -e "\nNot all the mandatory arguments are entered..."
   echo -e "\nNot all mandatory arguments are entered......" `date` >> mainlog.txt
-  echo -e "\ntype 'sh main.sh -h' for help\n"
+  echo -e "\nType 'sh main.sh -h' for help\n"
   echo -e "\nExiting the program......" `date` >> mainlog.txt
   exit 1
 fi
