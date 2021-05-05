@@ -218,7 +218,7 @@ def happy_plots():
     
     data = [metric_precision_i_all, metric_recall_i_all, metric_f1_i_all, metric_precision_s_all, 
             metric_recall_s_all, metric_f1_s_all, metric_precision_i_pass, metric_recall_i_pass,
-            metric_f1_i_pass, metric_f1_i_pass, metric_recall_s_pass, metric_f1_i_pass]
+            metric_f1_i_pass, metric_precision_s_pass, metric_recall_s_pass, metric_f1_s_pass]
     
     # Setting the legends for the combined bar plots
     plot_labels1=['Precision','Precision','Precision','Precision']
