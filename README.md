@@ -56,7 +56,7 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 
 2. The *parameters.txt* file is also generated which cotains the list of parameters which have been passed by the user for running the program. This is also found in the $installation_path/vcf_comp_with_gold_standard folder.
   
-3.  A *summary file* containing the metrices is generated in the xlsx format. Also, there are *plot files* which are generated that include the combined bar plots comparing the values for different metrices like recall, precision and  f1 scores for all the vcf files. They are generated in the *pdf* format. These are generated in the output path which is specified by the user.
+3.  A *summary file* containing the metrices is generated in the *xlsx* format. Also, there are *plot files* which are generated that include the combined bar plots comparing the values for different metrices like recall, precision and  f1 scores for all the vcf files. They are generated in the *pdf* format. These are generated in the output path which is specified by the user.
 
 4.  The *other result files* contain outputs from the *hap.py* tool run. These are also generated in the output path which is specified by the user.
 
