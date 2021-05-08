@@ -146,6 +146,80 @@ def happy_plots():
         labels.append(p)
 
 
+     # Finding the lengest filename
+    longest_string = max(labels, key=len)
+    
+    # Finding the length of the file with the longest filename
+    maxl = len(longest_string)
+    
+    # Making the excel file containing the metrices
+    
+    # Initializing the excel workbook
+    workbook = xlsxwriter.Workbook('Analysis.xlsx')
+    worksheet = workbook.add_worksheet('Metrics Scores.xlsx')
+
+    # Setting the cell width
+    worksheet.set_column('A:A', maxl)
+    worksheet.set_column('B:M', 10)
+    
+    # Create a format to use in the merged range.
+    merge_format = workbook.add_format({
+    'bold': 1,
+    'border': 1,
+    'align': 'center',
+    'valign': 'vcenter',
+    'fg_color': '#D7E4BC'})
+    
+    # Displaying the headers
+    worksheet.merge_range('A1:A3', 'File Names', merge_format)
+    worksheet.merge_range('B1:E1', 'Precision', merge_format)
+    worksheet.merge_range('F1:I1', 'Recall', merge_format)
+    worksheet.merge_range('J1:M1', 'F1 Score', merge_format)
+    worksheet.merge_range('B2:C2', 'INDEL', merge_format)
+    worksheet.merge_range('D2:E2', 'SNP', merge_format)
+    worksheet.merge_range('F2:G2', 'INDEL', merge_format)
+    worksheet.merge_range('H2:I2', 'SNP', merge_format)
+    worksheet.merge_range('J2:K2', 'INDELs', merge_format)
+    worksheet.merge_range('L2:M2', 'SNP', merge_format)
+    
+    s=str(3)
+    x=1
+    for c in ascii_uppercase:
+        if c=='A':
+            continue
+        elif c>'M':
+            break
+        else:
+            k=c+s
+            x=x+1
+            if x%2==0:
+                worksheet.write(k,"ALL", merge_format)
+            else:
+                worksheet.write(k,"PASS", merge_format)
+    
+    # Defining the cell format for the values
+    cell_fmt = workbook.add_format({'align': 'center','valign': 'vcenter', 'border': 1, 'num_format': '0.00'})
+    filename_fmt = workbook.add_format({'align': 'left', 'valign': 'vcenter', 'border': 1})
+    
+    row=3
+    for i in range(len(labels)):
+        worksheet.write(row,0,labels[i], filename_fmt)
+        worksheet.write(row,1,metric_precision_i_all[i], cell_fmt )
+        worksheet.write(row,2,metric_precision_i_pass[i], cell_fmt)
+        worksheet.write(row,3,metric_precision_s_all[i], cell_fmt)
+        worksheet.write(row,4,metric_precision_s_pass[i], cell_fmt)
+        worksheet.write(row,5,metric_recall_i_all[i], cell_fmt)
+        worksheet.write(row,6,metric_recall_i_pass[i], cell_fmt)
+        worksheet.write(row,7,metric_recall_s_all[i], cell_fmt)
+        worksheet.write(row,8,metric_recall_s_pass[i], cell_fmt)
+        worksheet.write(row,9,metric_f1_i_all[i], cell_fmt)
+        worksheet.write(row,10,metric_f1_i_pass[i], cell_fmt)
+        worksheet.write(row,11,metric_f1_s_all[i], cell_fmt)
+        worksheet.write(row,12,metric_f1_s_pass[i], cell_fmt)
+        row = row + 1
+    
+    # Closing the workbook
+    workbook.close()
         
     # Plotting for combined barplots with for SNPs and Indels for each individual performance metrices in different plots
         
