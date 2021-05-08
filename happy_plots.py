@@ -7,6 +7,8 @@ import glob
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
+import xlsxwriter
+from string import ascii_uppercase
 
 
 def autolabel(rects,ax):
