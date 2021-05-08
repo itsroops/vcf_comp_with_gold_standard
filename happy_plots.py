@@ -37,7 +37,7 @@ def happy_plots():
     Plots the combined barplots of the performance metrices for all the VCFs for both SNPs and Indels
             
     Parameters: 
-    None of the paramennters are required
+    None of the parameters are required
     
     Returns:
     Does not return anything
