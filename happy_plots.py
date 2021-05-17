@@ -181,7 +181,7 @@ def happy_plots():
     worksheet.merge_range('D2:E2', 'SNP', merge_format)
     worksheet.merge_range('F2:G2', 'INDEL', merge_format)
     worksheet.merge_range('H2:I2', 'SNP', merge_format)
-    worksheet.merge_range('J2:K2', 'INDELs', merge_format)
+    worksheet.merge_range('J2:K2', 'INDEL', merge_format)
     worksheet.merge_range('L2:M2', 'SNP', merge_format)
     
     s=str(3)
