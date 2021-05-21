@@ -1,4 +1,4 @@
-# Automated benchmarking of a set of VCF files with a gold standard file using hap.py tool
+# Automated benchmarking of a set of VCF files with a gold standard file using hap.py tool for SNPs and INDELs
 
 ## About
 This tool would use the **hap.py** comparison tool for comparing the generated VCF files with the gold standard file. This can be used to automate the process of comparing several vcf files with the gold standard file, and specifically used for the SNPs and INDELs. It can be used either in an interactive way or by using  the command line interface by providing the parameters as options. The interactive method would aid a novice user to make the comparisons without much technical knowledge of the software requirements and other usages. However, for the integration of this tool into any existing bioinformatics pipleline, the command line interface needs to be used. This interface is for users having basic knowledge of linux commands and for those who know how to run such interfaces.
