@@ -8,7 +8,7 @@ This tool would use the **hap.py** comparison tool for comparing the generated V
 1. GCC/G++ 4.9.2+ for compiling
 2. Linux clusters having **slurm workload manager**. 
 3. Availability of **make** program. It can be checked using `which make`. This is required for building source codes.
-4. Availability of **git** program. It can be checked using `which git`. This is required for cloning the guthub repository.
+4. Availability of **git** program. It can be checked using `which git`. This is required for cloning the github repository.
 5. Availability of **wget** program. It can be checked using `which wget`. This is required for downloading files.
 6. Availability of **tar** program. It can be checked using `which tar`. This is required for extracting compressed files.
 
