@@ -73,7 +73,7 @@ echo -e "\nInstalling the required packages for the python3 default conda enviro
 echo -e "\n"
 
 # Installing the required packages for the python 3 environment
-$conda_path/conda install -y pandas matplotlib
+$conda_path/conda install -y pandas matplotlib xlsxwriter
 
 echo -e "\nDownloading the hap.py tool version 0.3.14 from the github......"
 echo -e "\n"
