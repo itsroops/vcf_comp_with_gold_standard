@@ -295,7 +295,7 @@ echo -e "\nPlease enter the email address to get notified. Default: The email ad
 read mail_id
 
 # Checking the validity of the argument
-if [[ $mail_id != *@*.* ]] ; then
+if [[ ! -z $mail_id && $mail_id != *@*.* ]] ; then
    echo -e "\nInvalid Email Address\n"
    echo -e "\nInvalid Email Address......" `date` >> mainlog.txt
    echo -e "\nExiting the program......" `date` >> mainlog.txt
