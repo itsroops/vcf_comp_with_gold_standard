@@ -157,7 +157,7 @@ def happy_plots():
     # Making the excel file containing the metrices
     
     # Initializing the excel workbook
-    workbook = xlsxwriter.Workbook('Analysis.xlsx')
+    workbook = xlsxwriter.Workbook(filepath + '/Analysis.xlsx')
     worksheet = workbook.add_worksheet('Metrics Scores.xlsx')
 
     # Setting the cell width
