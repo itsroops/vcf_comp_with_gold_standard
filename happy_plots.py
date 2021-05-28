@@ -206,18 +206,69 @@ def happy_plots():
     row=3
     for i in range(len(labels)):
         worksheet.write(row,0,labels[i], filename_fmt)
-        worksheet.write(row,1,metric_precision_i_all[i], cell_fmt )
-        worksheet.write(row,2,metric_precision_i_pass[i], cell_fmt)
-        worksheet.write(row,3,metric_precision_s_all[i], cell_fmt)
-        worksheet.write(row,4,metric_precision_s_pass[i], cell_fmt)
-        worksheet.write(row,5,metric_recall_i_all[i], cell_fmt)
-        worksheet.write(row,6,metric_recall_i_pass[i], cell_fmt)
-        worksheet.write(row,7,metric_recall_s_all[i], cell_fmt)
-        worksheet.write(row,8,metric_recall_s_pass[i], cell_fmt)
-        worksheet.write(row,9,metric_f1_i_all[i], cell_fmt)
-        worksheet.write(row,10,metric_f1_i_pass[i], cell_fmt)
-        worksheet.write(row,11,metric_f1_s_all[i], cell_fmt)
-        worksheet.write(row,12,metric_f1_s_pass[i], cell_fmt)
+        
+        arr = np.array(metric_precision_i_all)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,1,arr[i], cell_fmt )
+        
+        arr = np.array(metric_precision_i_pass)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,2,arr[i], cell_fmt )
+        
+        arr = np.array(metric_precision_s_all)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0
+        worksheet.write(row,3,arr[i], cell_fmt )
+        
+        arr = np.array(metric_precision_s_pass)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,4,arr[i], cell_fmt )
+        
+        arr = np.array(metric_recall_i_all)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,5,arr[i], cell_fmt )    
+            
+        arr = np.array(metric_recall_i_pass)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,6,arr[i], cell_fmt )
+            
+        arr = np.array(metric_recall_s_all)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,7,arr[i], cell_fmt )    
+            
+        arr = np.array(metric_recall_s_pass)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,8,arr[i], cell_fmt )
+             
+          
+        arr = np.array(metric_f1_i_all)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,9,arr[i], cell_fmt)
+        
+        arr = np.array(metric_f1_i_pass)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,10,arr[i], cell_fmt)
+        
+       
+        arr = np.array(metric_f1_s_all)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,11,arr[i], cell_fmt)
+        
+     
+        arr = np.array(metric_f1_s_pass)
+        where_are_NaNs = isnan(arr)
+        arr[where_are_NaNs] = 0.0
+        worksheet.write(row,12,arr[i], cell_fmt) 
         row = row + 1
     
     # Closing the workbook
