@@ -72,5 +72,5 @@ The outputs from the tool can be categorized into three forms, namely, *log file
 This work is guided by Dr. Susanne Motameny and supported by Cologne Center for Genomics (CCG), Germany
 
 ## Contact
-For any queries/issues, please mail to *avirupgn@gmail.com*
+For any queries/issues, please mail to *its.roops@gmail.com*
 
